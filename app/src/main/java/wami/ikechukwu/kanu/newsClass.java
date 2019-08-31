@@ -4,5 +4,5 @@ public class newsClass {
     private String mImage;
     private String mTitle;
 
-    public newsClass (String mImage, String)
+   // public newsClass (String mImage, String);
 }
