@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                        mText.setText(jsonObject.getString(KEY_AUTHOR));
+                        mText.append(jsonObject.getString(KEY_AUTHOR));
 
                     }
                 } catch (JSONException e) {
