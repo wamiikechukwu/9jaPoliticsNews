@@ -15,9 +15,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class MainActivity extends AppCompatActivity {
 
     private final String KEY_AUTHOR = "author";
@@ -26,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private final String KEY_URL = "url";
     private final String KEY_URL_TO_IMAGE = "urlToImage";
     private final String KEY_PUBLISHED_AT = "publishedAt";
-    //ArrayList to store the content in from the JSON
-    ArrayList<String> arrayList = new ArrayList<>();
+
     //this string is appended to the url
     String urlLink = "buhari";
     TextView mText;
@@ -61,11 +57,8 @@ public class MainActivity extends AppCompatActivity {
                     //Using a for loop to get the object (data) in the JSON
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        HashMap<String, String> hashMap = new HashMap<>();
-                        hashMap.put(KEY_AUTHOR, jsonObject.getString("author"));
-                        hashMap.put(KEY_TITLE, jsonObject.getString("title"));
 
-                        mText.setText(arrayList.get(i));
+                        mText.setText(jsonObject.getString(KEY_AUTHOR));
 
                     }
                 } catch (JSONException e) {
