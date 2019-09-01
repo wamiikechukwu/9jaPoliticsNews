@@ -2,7 +2,8 @@ package wami.ikechukwu.kanu;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,6 +16,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private final String KEY_AUTHOR = "author";
@@ -26,8 +29,11 @@ public class MainActivity extends AppCompatActivity {
 
     //this string is appended to the url
     String urlLink = "buhari";
-    TextView mText;
+    String AUTHOR;
     RequestQueue requestQueue;
+    private RecyclerView recyclerView;
+    private newsAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +44,18 @@ public class MainActivity extends AppCompatActivity {
         //Created an instance of the volley object
         requestQueue = Volley.newRequestQueue(this);
 
-        mText = findViewById(R.id.text_id);
-
         jsonParser();
+
+        ArrayList<dataModel> arrayList = new ArrayList<>();
+        arrayList.add(new dataModel(AUTHOR));
+
+        recyclerView = findViewById(R.id.recyclerView);
+        mAdapter = new newsAdapter(arrayList);
+        mLayout = new LinearLayoutManager(this);
+
+        recyclerView.setLayoutManager(mLayout);
+        recyclerView.setAdapter(mAdapter);
+
 
     }
 
@@ -58,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                        mText.append(jsonObject.getString(KEY_AUTHOR));
+                        AUTHOR = jsonObject.getString(KEY_AUTHOR);
 
                     }
                 } catch (JSONException e) {
