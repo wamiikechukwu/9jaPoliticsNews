@@ -4,14 +4,23 @@ public class dataModel {
 
     private String Title;
 
-    public dataModel(String mTitle) {
+    public dataModel() {
 
-        this.Title = mTitle;
+    }
+
+    public dataModel(String Title) {
+
+        this.Title = Title;
     }
 
     public String getTitle() {
 
         return Title;
+    }
+
+    public void setTitle(String Title) {
+
+        this.Title = Title;
     }
 
 }

@@ -1,9 +1,12 @@
 package wami.ikechukwu.kanu;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,8 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
     //this string is appended to the url
     String urlLink = "buhari";
-    String AUTHOR;
-    RequestQueue requestQueue;
+    TextView mTextView;
+
+    //TODO: IN A SUITATION WHERE THERE IS AN ERROR CHNAGE TO THE FOLLOWING
+    //List<dataModel> list;
+    ArrayList<dataModel> list;
+
     private RecyclerView recyclerView;
     private newsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayout;
@@ -41,25 +48,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Created an instance of the volley object
-        requestQueue = Volley.newRequestQueue(this);
 
-        jsonParser();
-
-        ArrayList<dataModel> arrayList = new ArrayList<>();
-        arrayList.add(new dataModel(AUTHOR));
-
+        list = new ArrayList<>();
+        mTextView = findViewById(R.id.layout_text);
         recyclerView = findViewById(R.id.recyclerView);
-        mAdapter = new newsAdapter(arrayList);
+        mAdapter = new newsAdapter(getApplicationContext(), list);
         mLayout = new LinearLayoutManager(this);
 
         recyclerView.setLayoutManager(mLayout);
         recyclerView.setAdapter(mAdapter);
 
-
+        jsonParser();
     }
 
     private void jsonParser() {
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://newsapi.org/v2/everything?q=" + urlLink + "&language=en&sortBy=publishedAt&pageSize=100&apiKey=655446a36e784e79b2b62adcad45be09", null, new Response.Listener<JSONObject>() {
 
@@ -73,21 +79,27 @@ public class MainActivity extends AppCompatActivity {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                        AUTHOR = jsonObject.getString(KEY_AUTHOR);
-
+                        dataModel dataModel = new dataModel();
+                        dataModel.setTitle(jsonObject.getString(KEY_AUTHOR));
+                        list.add(dataModel);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+
                 }
+                mAdapter.notifyDataSetChanged();
+                progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                error.printStackTrace();
+                Log.e("Volley", error.toString());
+                progressDialog.dismiss();
             }
         });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
     }
 

@@ -1,5 +1,6 @@
 package wami.ikechukwu.kanu;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,31 +11,33 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
+    //TODO: if the code doesn't work, change this ARRAYLIST TO LIST USING THE FORMAT BELOW
+    // private List<dataModel> mDataModel;
 
     private ArrayList<dataModel> mDataModel;
+    private Context context;
 
-    public newsAdapter(ArrayList<dataModel> mDataModel) {
+    public newsAdapter(Context context, ArrayList<dataModel> mDataModel) {
 
+        this.context = context;
         this.mDataModel = mDataModel;
     }
 
     @NonNull
     @Override
-    public newsAdapter.viewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public viewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         View view =
-                LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_layout,
+                LayoutInflater.from(context).inflate(R.layout.recyclerview_layout,
                         viewGroup, false);
-        newsAdapter.viewHolder holder = new newsAdapter.viewHolder(view);
-
-        return holder;
+        return new viewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull newsAdapter.viewHolder viewHolder, int i) {
 
-        dataModel currentItem = mDataModel.get(i);
-        viewHolder.mTextView.setText(currentItem.getTitle());
+        dataModel dataModel = mDataModel.get(i);
+        viewHolder.mTextView.setText(dataModel.getTitle());
     }
 
     @Override
