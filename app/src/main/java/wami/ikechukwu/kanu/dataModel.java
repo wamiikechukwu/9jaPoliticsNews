@@ -4,20 +4,27 @@ public class dataModel {
 
     private String Title;
     private String Image;
+    private String Descrip;
 
     public dataModel() {
 
     }
 
-    public dataModel(String Title, String Image) {
+    public dataModel(String Title, String Image, String Descrip) {
 
         this.Title = Title;
         this.Image = Image;
+        this.Descrip = Descrip;
     }
 
     public String getImage() {
 
         return Image;
+    }
+
+    public void setImage(String Image) {
+
+        this.Image = Image;
     }
 
     public String getTitle() {
@@ -30,9 +37,14 @@ public class dataModel {
         this.Title = Title;
     }
 
-    public void setImage(String Image) {
+    public String getDescrip() {
 
-        this.Image = Image;
+        return Descrip;
+    }
+
+    public void setDescrip(String Descrip) {
+
+        this.Descrip = Descrip;
     }
 
 

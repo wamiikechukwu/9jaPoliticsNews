@@ -39,7 +39,7 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
 
         dataModel dataModel = mDataModel.get(i);
         viewHolder.mTextView.setText(dataModel.getTitle());
-        //viewHolder.mImageView.setImageResource(dataModel.getImage());
+        viewHolder.mTextDescrip.setText(dataModel.getDescrip());
         Glide.with(context).load(dataModel.getImage()).into(viewHolder.mImageView);
     }
 
@@ -53,12 +53,14 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
 
         public TextView mTextView;
         public ImageView mImageView;
+        public TextView mTextDescrip;
 
         public viewHolder(@NonNull View itemView) {
 
             super(itemView);
             mTextView = itemView.findViewById(R.id.layout_text);
             mImageView = itemView.findViewById(R.id.layout_image);
+            mTextDescrip = itemView.findViewById(R.id.layout_descrip);
         }
 
     }

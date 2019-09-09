@@ -1,7 +1,7 @@
 package wami.ikechukwu.kanu;
 //TODO add cache functions to volley and glide
 
-import android.app.ProgressDialog;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +21,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import dmax.dialog.SpotsDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
@@ -61,9 +64,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void jsonParser() {
-        //TODO: add a custom progress dialog
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
+
+        final AlertDialog progressDialog = new SpotsDialog(this, R.style.customProgressDialog);
         progressDialog.show();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://newsapi.org/v2/everything?q=" + urlLink + "&language=en&sortBy=publishedAt&pageSize=100&apiKey=655446a36e784e79b2b62adcad45be09", null, new Response.Listener<JSONObject>() {
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                         dataModel dataModel = new dataModel();
                         dataModel.setTitle(jsonObject.getString(KEY_TITLE));
                         dataModel.setImage(jsonObject.getString(KEY_URL_TO_IMAGE));
+                        dataModel.setDescrip(jsonObject.getString(KEY_DESCRIPTION));
                         list.add(dataModel);
                     }
                 } catch (JSONException e) {
