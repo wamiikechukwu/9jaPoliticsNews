@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:textColor="#F000"
+                android:maxEms="150"
                 android:textSize="20sp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
