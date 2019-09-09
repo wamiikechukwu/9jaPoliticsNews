@@ -7,9 +7,11 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="3dp"
         android:clickable="true"
         android:focusable="true"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="4dp"
         app:cardCornerRadius="5dp"
         app:cardElevation="5dp">
         
@@ -34,7 +36,7 @@
                 android:textColor="#F000"
                 android:background="#FFFF"
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:textSize="18sp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>

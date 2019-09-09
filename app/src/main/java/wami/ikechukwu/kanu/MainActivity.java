@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void jsonParser() {
-
+        //TODO: add a custom progress dialog
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
