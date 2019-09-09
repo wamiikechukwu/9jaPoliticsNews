@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                         dataModel dataModel = new dataModel();
-                        dataModel.setTitle(jsonObject.getString(KEY_AUTHOR));
+                        dataModel.setTitle(jsonObject.getString(KEY_TITLE));
                         dataModel.setImage(jsonObject.getString(KEY_URL_TO_IMAGE));
                         list.add(dataModel);
                     }
