@@ -6,7 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -36,6 +39,8 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
 
         dataModel dataModel = mDataModel.get(i);
         viewHolder.mTextView.setText(dataModel.getTitle());
+        //viewHolder.mImageView.setImageResource(dataModel.getImage());
+        Glide.with(context).load(dataModel.getImage()).into(viewHolder.mImageView);
     }
 
     @Override
@@ -47,11 +52,13 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
     public static class viewHolder extends RecyclerView.ViewHolder {
 
         public TextView mTextView;
+        public ImageView mImageView;
 
         public viewHolder(@NonNull View itemView) {
 
             super(itemView);
             mTextView = itemView.findViewById(R.id.layout_text);
+            mImageView = itemView.findViewById(R.id.layout_image);
         }
 
     }

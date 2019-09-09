@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
                         dataModel dataModel = new dataModel();
                         dataModel.setTitle(jsonObject.getString(KEY_AUTHOR));
+                        dataModel.setImage(jsonObject.getString(KEY_URL_TO_IMAGE));
                         list.add(dataModel);
                     }
                 } catch (JSONException e) {
