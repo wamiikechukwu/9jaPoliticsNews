@@ -1,4 +1,5 @@
 package wami.ikechukwu.kanu;
+//TODO add cache functions to volley and glide
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -34,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
     String urlLink = "buhari";
     TextView mTextView;
 
-    //TODO: IN A SUITATION WHERE THERE IS AN ERROR CHNAGE TO THE FOLLOWING
-    //List<dataModel> list;
     ArrayList<dataModel> list;
 
     private RecyclerView recyclerView;

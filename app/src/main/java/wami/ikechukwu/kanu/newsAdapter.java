@@ -11,8 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
-    //TODO: if the code doesn't work, change this ARRAYLIST TO LIST USING THE FORMAT BELOW
-    // private List<dataModel> mDataModel;
 
     private ArrayList<dataModel> mDataModel;
     private Context context;

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">9ja Politics News</string>
+    <string name="Recyclerview_ImageContent">a thumbnail of the news picture</string>
 </resources>
