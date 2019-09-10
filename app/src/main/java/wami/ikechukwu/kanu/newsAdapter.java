@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -48,8 +49,13 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(view.getContext(), newsActivity.class);
-                view.getContext().startActivity(intent);
+                try {
+                    Intent intent = new Intent(view.getContext(), newsActivity.class);
+                    view.getContext().startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(context, "click error", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
             }
         });
 
