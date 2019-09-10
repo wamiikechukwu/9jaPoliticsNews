@@ -2,12 +2,14 @@ package wami.ikechukwu.kanu;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -35,12 +37,23 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull newsAdapter.viewHolder viewHolder, int i) {
-
+    public void onBindViewHolder(@NonNull final newsAdapter.viewHolder viewHolder, int i) {
         dataModel dataModel = mDataModel.get(i);
         viewHolder.mTextView.setText(dataModel.getTitle());
         viewHolder.mTextDescrip.setText(dataModel.getDescrip());
         Glide.with(context).load(dataModel.getImage()).into(viewHolder.mImageView);
+
+        viewHolder.mclickListener.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(context,
+                        "Clicked recycler view item at position " + viewHolder.getAdapterPosition(),
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     @Override
@@ -54,6 +67,7 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
         public TextView mTextView;
         public ImageView mImageView;
         public TextView mTextDescrip;
+        public CardView mclickListener;
 
         public viewHolder(@NonNull View itemView) {
 
@@ -61,6 +75,7 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
             mTextView = itemView.findViewById(R.id.layout_text);
             mImageView = itemView.findViewById(R.id.layout_image);
             mTextDescrip = itemView.findViewById(R.id.layout_descrip);
+            mclickListener = (CardView) itemView.findViewById(R.id.recyclerviewlayout);
         }
 
     }
