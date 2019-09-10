@@ -1,6 +1,7 @@
 package wami.ikechukwu.kanu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -46,11 +46,10 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
         viewHolder.mclickListener.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
 
-                Toast.makeText(context,
-                        "Clicked recycler view item at position " + viewHolder.getAdapterPosition(),
-                        Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(view.getContext(), newsActivity.class);
+                view.getContext().startActivity(intent);
             }
         });
 
