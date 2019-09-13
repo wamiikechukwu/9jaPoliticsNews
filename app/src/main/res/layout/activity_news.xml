@@ -4,34 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     
-    <ImageView
-        android:id="@+id/layout_image"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentTop="true"
-        android:contentDescription="@string/Recyclerview_ImageContent"
-        android:scaleType="centerCrop" />
     
     <TextView
         android:id="@+id/layout_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_image"
         android:background="#FFFF"
         android:padding="5dp"
+        android:text="hello world"
         android:textColor="#F000"
         android:textSize="17sp"
         android:textStyle="bold" />
     
-    <TextView
-        android:id="@+id/layout_descrip"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout_text"
-        android:background="#FFFF"
-        android:padding="5dp"
-        android:textColor="#F000"
-        android:textSize="15sp" />
-
 
 </RelativeLayout>

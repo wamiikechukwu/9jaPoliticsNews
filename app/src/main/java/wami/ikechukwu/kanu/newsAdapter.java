@@ -1,7 +1,6 @@
 package wami.ikechukwu.kanu;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -25,6 +23,7 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
 
         this.context = context;
         this.mDataModel = mDataModel;
+
     }
 
     @NonNull
@@ -38,26 +37,28 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final newsAdapter.viewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final newsAdapter.viewHolder viewHolder, final int i) {
+
         dataModel dataModel = mDataModel.get(i);
         viewHolder.mTextView.setText(dataModel.getTitle());
         viewHolder.mTextDescrip.setText(dataModel.getDescrip());
         Glide.with(context).load(dataModel.getImage()).into(viewHolder.mImageView);
 
-        viewHolder.mclickListener.setOnClickListener(new View.OnClickListener() {
+
+      /* viewHolder.mclickListener.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view) {
+          public void onClick(View view) {
 
-                try {
-                    Intent intent = new Intent(view.getContext(), newsActivity.class);
-                    view.getContext().startActivity(intent);
-                } catch (Exception e) {
-                    Toast.makeText(context, "click error", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
-            }
-        });
+             Toast.makeText(context,"item position is " +getItemCount() ,Toast.LENGTH_SHORT).show();
+              Intent intent = new Intent(String.valueOf(newsActivity.class));
+              intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+              context.startActivity(intent);
+
+          }
+       });
+       */
 
     }
 
@@ -67,7 +68,7 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
         return mDataModel.size();
     }
 
-    public static class viewHolder extends RecyclerView.ViewHolder {
+    public static class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView mTextView;
         public ImageView mImageView;
@@ -80,9 +81,15 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
             mTextView = itemView.findViewById(R.id.layout_text);
             mImageView = itemView.findViewById(R.id.layout_image);
             mTextDescrip = itemView.findViewById(R.id.layout_descrip);
-            mclickListener = (CardView) itemView.findViewById(R.id.recyclerviewlayout);
+            //  mclickListener = (CardView) itemView.findViewById(R.id.recyclerviewlayout);
+            itemView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+
         }
 
     }
-
 }

@@ -10,6 +10,9 @@ public class newsActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+
+        MainActivity mainActivity = new MainActivity();
+        mainActivity.list.get(0);
     }
 
 }
