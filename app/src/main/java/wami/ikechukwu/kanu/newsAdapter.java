@@ -2,7 +2,6 @@ package wami.ikechukwu.kanu;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 
 public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
 
-    public ArrayList<dataModel> mDataModel;
+    private ArrayList<dataModel> mDataModel;
     private Context context;
 
     public newsAdapter(Context context, ArrayList<dataModel> mDataModel) {
@@ -72,7 +71,7 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
         public TextView mTextView;
         public ImageView mImageView;
         public TextView mTextDescrip;
-       // public CardView mclickListener;
+        // public CardView mclickListener;
 
         public viewHolder(@NonNull View itemView) {
 
@@ -80,7 +79,7 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
             mTextView = itemView.findViewById(R.id.layout_text);
             mImageView = itemView.findViewById(R.id.layout_image);
             mTextDescrip = itemView.findViewById(R.id.layout_descrip);
-          //  mclickListener = (CardView) itemView.findViewById(R.id.recyclerviewlayout);
+            //  mclickListener = (CardView) itemView.findViewById(R.id.recyclerviewlayout);
 
         }
 
