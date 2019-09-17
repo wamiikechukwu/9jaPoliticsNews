@@ -1,6 +1,7 @@
 package wami.ikechukwu.kanu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -49,10 +49,9 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(context, "item position is " + getItemCount(), Toast.LENGTH_SHORT).show();
-                // Intent intent = new Intent(String.valueOf(newsActivity.class));
-                // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                // context.startActivity(intent);
+                Intent intent = new Intent(view.getContext(), news_detail.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                view.getContext().startActivity(intent);
             }
         });
 
