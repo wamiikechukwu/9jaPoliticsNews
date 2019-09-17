@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
 
-    private ArrayList<dataModel> mDataModel;
+    public ArrayList<dataModel> mDataModel;
     private Context context;
 
     public newsAdapter(Context context, ArrayList<dataModel> mDataModel) {
@@ -45,17 +45,16 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
         Glide.with(context).load(dataModel.getImage()).into(viewHolder.mImageView);
 
 
-      /* viewHolder.mclickListener.setOnClickListener(new View.OnClickListener() {
+     /* viewHolder.mclickListener.setOnClickListener(new View.OnClickListener() {
 
             @Override
           public void onClick(View view) {
 
              Toast.makeText(context,"item position is " +getItemCount() ,Toast.LENGTH_SHORT).show();
-              Intent intent = new Intent(String.valueOf(newsActivity.class));
-              intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+             // Intent intent = new Intent(String.valueOf(newsActivity.class));
+             // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-              context.startActivity(intent);
-
+             // context.startActivity(intent);
           }
        });
        */
@@ -68,12 +67,12 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
         return mDataModel.size();
     }
 
-    public static class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class viewHolder extends RecyclerView.ViewHolder {
 
         public TextView mTextView;
         public ImageView mImageView;
         public TextView mTextDescrip;
-        public CardView mclickListener;
+       // public CardView mclickListener;
 
         public viewHolder(@NonNull View itemView) {
 
@@ -81,15 +80,10 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
             mTextView = itemView.findViewById(R.id.layout_text);
             mImageView = itemView.findViewById(R.id.layout_image);
             mTextDescrip = itemView.findViewById(R.id.layout_descrip);
-            //  mclickListener = (CardView) itemView.findViewById(R.id.recyclerviewlayout);
-            itemView.setOnClickListener(this);
-
-        }
-
-        @Override
-        public void onClick(View v) {
+          //  mclickListener = (CardView) itemView.findViewById(R.id.recyclerviewlayout);
 
         }
 
     }
+
 }
