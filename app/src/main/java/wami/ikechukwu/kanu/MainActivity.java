@@ -1,5 +1,4 @@
 package wami.ikechukwu.kanu;
-//TODO add cache functions to volley and glide
 
 import android.app.AlertDialog;
 import android.content.Intent;
