@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
 
 
         list = new ArrayList<>();
-        //TODO delete this line in the future if this app do not encounter any error
         recyclerView = findViewById(R.id.recyclerView);
         mAdapter = new newsAdapter(getApplicationContext(), list, this);
         mLayout = new LinearLayoutManager(this);
