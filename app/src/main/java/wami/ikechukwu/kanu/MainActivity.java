@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
 
     //this string is appended to the url
     String urlLink = "buhari";
-    TextView mTextView;
 
     ArrayList<dataModel> list;
 
@@ -55,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
 
         list = new ArrayList<>();
         //TODO delete this line in the future if this app do not encounter any error
-        // mTextView = findViewById(R.id.layout_text);
         recyclerView = findViewById(R.id.recyclerView);
         mAdapter = new newsAdapter(getApplicationContext(), list, this);
         mLayout = new LinearLayoutManager(this);
@@ -111,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
     @Override
     public void onItemClick(int position) {
 
-        Toast.makeText(this,"it worked " +position ,Toast.LENGTH_SHORT ).show();
+        Toast.makeText(this, "it worked " + position, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, news_detail.class);
         startActivity(intent);
     }
