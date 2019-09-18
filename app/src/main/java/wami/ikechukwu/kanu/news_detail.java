@@ -12,6 +12,11 @@ public class news_detail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_detail);
 
+        newsRequest();
+    }
+
+    public void newsRequest() {
+
     }
 
 }

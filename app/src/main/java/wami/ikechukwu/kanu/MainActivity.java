@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -105,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
     @Override
     public void onItemClick(int position) {
 
-        Toast.makeText(this, "it worked " + position, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, news_detail.class);
         startActivity(intent);
     }
