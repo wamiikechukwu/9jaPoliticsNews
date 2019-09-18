@@ -2,12 +2,14 @@ package wami.ikechukwu.kanu;
 //TODO add cache functions to volley and glide
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements newsAdapter.onclicklistener {
 
     private final String KEY_AUTHOR = "author";
     private final String KEY_TITLE = "title";
@@ -52,9 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         list = new ArrayList<>();
-        mTextView = findViewById(R.id.layout_text);
+        //TODO delete this line in the future if this app do not encounter any error
+        // mTextView = findViewById(R.id.layout_text);
         recyclerView = findViewById(R.id.recyclerView);
-        mAdapter = new newsAdapter(getApplicationContext(), list);
+        mAdapter = new newsAdapter(getApplicationContext(), list, this);
         mLayout = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayout);
         recyclerView.setAdapter(mAdapter);
@@ -103,6 +106,14 @@ public class MainActivity extends AppCompatActivity {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+
+        Toast.makeText(this,"it worked " +position ,Toast.LENGTH_SHORT ).show();
+        Intent intent = new Intent(this, news_detail.class);
+        startActivity(intent);
     }
 
 }
