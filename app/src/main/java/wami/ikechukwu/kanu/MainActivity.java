@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
     public void onItemClick(int position) {
 
         Intent intent = new Intent(this, news_detail.class);
+        intent.putExtra("POSITION", position);
         startActivity(intent);
     }
 

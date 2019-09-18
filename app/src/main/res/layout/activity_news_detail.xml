@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:contentDescription="@string/Recyclerview_ImageContent"
-        android:scaleType="centerCrop" />
+        android:scaleType="fitCenter" />
     
     <TextView
         android:id="@+id/newsDetail_Title"
@@ -19,8 +19,7 @@
         android:layout_below="@id/newsDetail_Image"
         android:layout_marginTop="15dp"
         android:textColor="#F000"
-        android:textSize="21sp"
-        android:textStyle="bold" />
+        android:textSize="20sp" />
     
     <TextView
         android:id="@+id/newDetail_Time_Posted"
