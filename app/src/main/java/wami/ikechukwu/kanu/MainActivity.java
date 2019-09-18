@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
         final AlertDialog progressDialog = new SpotsDialog(this, R.style.customProgressDialog);
         progressDialog.show();
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://newsapi.org/v2/everything?q=" + urlLink + "&language=en&sortBy=publishedAt&pageSize=100&apiKey=655446a36e784e79b2b62adcad45be09", null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://newsapi.org/v2/everything?q=" + urlLink + "&language=en&sortBy=publishedAt&pageSize=100&apiKey=a5f976b34089493abc8f97f088e5df64", null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
