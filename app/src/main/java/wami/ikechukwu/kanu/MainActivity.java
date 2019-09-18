@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
-
         list = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);
         mAdapter = new newsAdapter(getApplicationContext(), list, this);
