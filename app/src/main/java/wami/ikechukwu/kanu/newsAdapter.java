@@ -1,7 +1,6 @@
 package wami.ikechukwu.kanu;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -46,17 +45,6 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
         viewHolder.mTextDescrip.setText(dataModel.getDescrip());
         Glide.with(context).load(dataModel.getImage()).into(viewHolder.mImageView);
 
-        // viewHolder.mclickListener.setOnClickListener(new View.OnClickListener() {
-
-        /*   @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(context, news_detail.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-            }
-        });*/
-
     }
 
     @Override
@@ -71,12 +59,11 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
 
     }
 
-    public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView mTextView;
         public ImageView mImageView;
         public TextView mTextDescrip;
-        public CardView mclickListener;
 
         public viewHolder(@NonNull View itemView) {
 
@@ -84,12 +71,12 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
             mTextView = itemView.findViewById(R.id.layout_text);
             mImageView = itemView.findViewById(R.id.layout_image);
             mTextDescrip = itemView.findViewById(R.id.layout_descrip);
-            mclickListener = (CardView) itemView.findViewById(R.id.recyclerviewlayout);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
+
             int adapterposition = getAdapterPosition();
             clicklistener.onItemClick(adapterposition);
         }
