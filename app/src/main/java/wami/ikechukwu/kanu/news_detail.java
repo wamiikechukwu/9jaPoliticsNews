@@ -19,9 +19,10 @@ import org.json.JSONObject;
 
 public class news_detail extends AppCompatActivity {
 
-    private final String KEY_AUTHOR = "author";
+    //TODO: REMOVE THIS LINE IF THERE IS NO NEED FOR THE AUTHOR NAME IN THE APP
+    // private final String KEY_AUTHOR = "author";
     private final String KEY_TITLE = "title";
-    private final String KEY_DESCRIPTION = "description";
+    //private final String KEY_DESCRIPTION = "description";
     private final String KEY_URL = "url";
     private final String KEY_URL_TO_IMAGE = "urlToImage";
     private final String KEY_PUBLISHED_AT = "publishedAt";
@@ -62,7 +63,7 @@ public class news_detail extends AppCompatActivity {
                     JSONObject jsonObject = jsonArray.getJSONObject(itemPosition);
 
                     newsDetail_Title.setText(jsonObject.getString(KEY_TITLE));
-                    newsDetail_News.setText(jsonObject.getString(KEY_DESCRIPTION));
+                    newsDetail_News.setText(jsonObject.getString(KEY_URL));
                     Glide.with(getApplicationContext()).load(jsonObject.getString(KEY_URL_TO_IMAGE)).into(newsDetail_Image);
 
                 } catch (JSONException e) {
