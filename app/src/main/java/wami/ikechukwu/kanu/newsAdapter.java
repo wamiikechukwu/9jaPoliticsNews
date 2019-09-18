@@ -2,6 +2,7 @@ package wami.ikechukwu.kanu;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,6 +64,7 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
         public TextView mTextView;
         public ImageView mImageView;
         public TextView mTextDescrip;
+        public CardView mCardView;
 
         public viewHolder(@NonNull View itemView) {
 
@@ -70,7 +72,8 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
             mTextView = itemView.findViewById(R.id.layout_text);
             mImageView = itemView.findViewById(R.id.layout_image);
             mTextDescrip = itemView.findViewById(R.id.layout_descrip);
-            itemView.setOnClickListener(this);
+            mCardView = itemView.findViewById(R.id.recyclerviewlayout);
+            mCardView.setOnClickListener(this);
         }
 
         @Override
