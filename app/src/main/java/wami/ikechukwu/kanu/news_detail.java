@@ -35,7 +35,7 @@ public class news_detail extends AppCompatActivity {
     int itemPosition;
     //this string is appended to the url
     String urlLink = "buhari";
-
+    String url;
     TextView newsDetail_Title, newDetail_Time_Posted, newsDetail_News;
     ImageView newsDetail_Image;
 
@@ -53,6 +53,7 @@ public class news_detail extends AppCompatActivity {
         newsDetail_Image = findViewById(R.id.newsDetail_Image);
 
         newsRequest();
+        backgroundTask();
     }
 
     public void newsRequest() {
@@ -69,16 +70,10 @@ public class news_detail extends AppCompatActivity {
                     JSONObject jsonObject = jsonArray.getJSONObject(itemPosition);
 
                     newsDetail_Title.setText(jsonObject.getString(KEY_TITLE));
-                    String url = jsonObject.getString(KEY_URL);
+                    url = jsonObject.getString(KEY_URL);
                     Glide.with(getApplicationContext()).load(jsonObject.getString(KEY_URL_TO_IMAGE)).into(newsDetail_Image);
 
-                    Document document = Jsoup.connect(url).get();
-                    Elements element = document.select(".div p");
-                    for (Element p : element) {
-                        newsDetail_News.setText(p.text());
-                    }
-
-                } catch (JSONException | IOException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
 
                 }
@@ -92,6 +87,37 @@ public class news_detail extends AppCompatActivity {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public void backgroundTask() {
+
+        new Thread(new Runnable() {
+
+            final StringBuilder builder = new StringBuilder();
+
+            @Override
+            public void run() {
+
+                try {
+                    Document document = Jsoup.connect(url).get();
+                    Elements element = document.select(".div p");
+                    for (Element p : element) {
+                        builder.append(p.text());
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        newsDetail_News.setText(builder.toString());
+                    }
+                });
+            }
+        });
     }
 
 }
