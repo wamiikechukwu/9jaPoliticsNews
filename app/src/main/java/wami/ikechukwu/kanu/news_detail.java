@@ -72,7 +72,7 @@ public class news_detail extends AppCompatActivity {
                     Glide.with(getApplicationContext()).load(jsonObject.getString(KEY_URL_TO_IMAGE)).into(newsDetail_Image);
 
                     Document document = Jsoup.connect("KEY_URL").get();
-                    Element element = document.select("<p>").first();
+                    Element element = document.select("p").first();
                     //String fullNewsText = element.a
 
                 } catch (JSONException | IOException e) {
