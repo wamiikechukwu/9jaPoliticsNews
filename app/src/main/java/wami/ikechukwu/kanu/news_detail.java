@@ -16,6 +16,11 @@ import com.bumptech.glide.Glide;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+import java.io.IOException;
 
 public class news_detail extends AppCompatActivity {
 
@@ -66,7 +71,11 @@ public class news_detail extends AppCompatActivity {
                     newsDetail_News.setText(jsonObject.getString(KEY_URL));
                     Glide.with(getApplicationContext()).load(jsonObject.getString(KEY_URL_TO_IMAGE)).into(newsDetail_Image);
 
-                } catch (JSONException e) {
+                    Document document = Jsoup.connect("KEY_URL").get();
+                    Element element = document.select("<p>").first();
+                    //String fullNewsText = element.a
+
+                } catch (JSONException | IOException e) {
                     e.printStackTrace();
 
                 }
