@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
@@ -68,12 +69,14 @@ public class news_detail extends AppCompatActivity {
                     JSONObject jsonObject = jsonArray.getJSONObject(itemPosition);
 
                     newsDetail_Title.setText(jsonObject.getString(KEY_TITLE));
-                    newsDetail_News.setText(jsonObject.getString(KEY_URL));
+                    String url = jsonObject.getString(KEY_URL);
                     Glide.with(getApplicationContext()).load(jsonObject.getString(KEY_URL_TO_IMAGE)).into(newsDetail_Image);
 
-                    Document document = Jsoup.connect("KEY_URL").get();
-                    Element element = document.select("p").first();
-                    //String fullNewsText = element.a
+                    Document document = Jsoup.connect(url).get();
+                    Elements element = document.select(".div p");
+                    for (Element p : element) {
+                        newsDetail_News.setText(p.text());
+                    }
 
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
@@ -92,3 +95,4 @@ public class news_detail extends AppCompatActivity {
     }
 
 }
+
