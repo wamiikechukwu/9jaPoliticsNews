@@ -2,18 +2,7 @@ package wami.ikechukwu.kanu;
 
 import android.os.AsyncTask;
 
-public class backgroundTask extends AsyncTask {
-
-    public backgroundTask() {
-
-        super();
-    }
-
-    @Override
-    protected Object doInBackground(Object[] objects) {
-
-        return null;
-    }
+public class backgroundTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPreExecute() {
@@ -22,9 +11,21 @@ public class backgroundTask extends AsyncTask {
     }
 
     @Override
-    protected void onPostExecute(Object o) {
+    protected void onPostExecute(Void aVoid) {
 
-        super.onPostExecute(o);
+        super.onPostExecute(aVoid);
+    }
+
+    @Override
+    protected void onProgressUpdate(Void... values) {
+
+        super.onProgressUpdate(values);
+    }
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+
+        return null;
     }
 
 }
