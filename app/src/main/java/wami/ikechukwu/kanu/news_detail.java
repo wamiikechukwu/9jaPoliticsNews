@@ -1,9 +1,11 @@
 package wami.ikechukwu.kanu;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -53,7 +55,7 @@ public class news_detail extends AppCompatActivity {
         newsDetail_Image = findViewById(R.id.newsDetail_Image);
 
         newsRequest();
-        backgroundTask();
+        // new backgroundTask().execute();
     }
 
     public void newsRequest() {
@@ -70,6 +72,7 @@ public class news_detail extends AppCompatActivity {
                     JSONObject jsonObject = jsonArray.getJSONObject(itemPosition);
 
                     newsDetail_Title.setText(jsonObject.getString(KEY_TITLE));
+                    //newsDetail_News.setText(jsonObject.getString(KEY_TITLE));
                     url = jsonObject.getString(KEY_URL);
                     Glide.with(getApplicationContext()).load(jsonObject.getString(KEY_URL_TO_IMAGE)).into(newsDetail_Image);
 
@@ -87,23 +90,24 @@ public class news_detail extends AppCompatActivity {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
-    }
-
-    public void backgroundTask() {
 
         new Thread(new Runnable() {
 
             final StringBuilder builder = new StringBuilder();
+            String title;
 
             @Override
             public void run() {
 
                 try {
-                    Document document = Jsoup.connect(url).get();
-                    Elements element = document.select(".div p");
-                    for (Element p : element) {
-                        builder.append(p.text());
-                    }
+                    Document document = Jsoup.connect("https://www.vanguardngr.com/2019/09/three-women-others-set-free-by-katsina-bandits/").get();
+                    // Elements element = document.select("p");
+                   /* for (Element paragraph : element) {
+                        builder.append(paragraph.text());
+                        Toast.makeText(getApplicationContext(), "why it didnt work",
+                                Toast.LENGTH_SHORT).show();
+                    }*/
+                    title = document.title();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -113,11 +117,50 @@ public class news_detail extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        newsDetail_News.setText(builder.toString());
+                        // newsDetail_News.setText(builder.toString());
+                        newsDetail_News.setText(title);
+                        Toast.makeText(getApplicationContext(), "why it didnt work", Toast.LENGTH_SHORT).show();
+
                     }
                 });
             }
-        });
+        }).start();
+    }
+
+    public class backgroundTask extends AsyncTask<Void, Void, Void> {
+
+        String text;
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+
+            newsDetail_News.setText(text);
+            super.onPostExecute(aVoid);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            try {
+                Document document = Jsoup.connect(url).get();
+                Elements element = document.select("p");
+                for (Element paragraph : element) {
+                    text = paragraph.text();
+                    Toast.makeText(getApplicationContext(), "why it didnt work",
+                            Toast.LENGTH_SHORT).show();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
     }
 
 }
