@@ -100,7 +100,7 @@ public class news_detail extends AppCompatActivity {
             public void run() {
 
                 try {
-                    Document document = Jsoup.connect("https://www.vanguardngr.com/2019/09/three-women-others-set-free-by-katsina-bandits/").get();
+                    Document document = Jsoup.connect(url).get();
                     // Elements element = document.select("p");
                    /* for (Element paragraph : element) {
                         builder.append(paragraph.text());
