@@ -1,5 +1,6 @@
 package wami.ikechukwu.kanu;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
@@ -18,24 +19,33 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
 public class news_detail extends AppCompatActivity {
 
-    //TODO: REMOVE THESE LINE IF THERE IS NO NEED FOR THEM IN THE APP
+    //TODO: REMOVE THE UNUSED LINE IF THERE IS NO NEED FOR THEM IN THE APP
+    //THESE VARIABLE ARE USED TO GET THE MATCHING RESPONSE FROM THE JSON FROM THE API
     // private final String KEY_AUTHOR = "author";
     private final String KEY_TITLE = "title";
     //private final String KEY_DESCRIPTION = "description";
     private final String KEY_URL = "url";
     private final String KEY_URL_TO_IMAGE = "urlToImage";
     private final String KEY_PUBLISHED_AT = "publishedAt";
+
+    //THIS VARIABLE HOLD THE POSITION (NUMBER/INTEGER) OF THE ITEM CLICKED IN THE RECYCLERVIEW
     int itemPosition;
-    //this string is appended to the url
+
+    //THIS STRING IS APPENDED TO THE URL OF THE API AND IS THE MAIN KEYWORD BEING SEARCHED FOR
     String urlLink = "buhari";
-    String url;
+
+    //THIS STRING IS INTENDED TO HOLD THE URL FROM THE JSON -WHICH IS USED OPEN EACH INDIVIDUAL
+    // NEWS PAGE
+
+    String news_url;
+
+    //INSTANCE OF THE XML VIEWS
     TextView newsDetail_Title, newDetail_Time_Posted, newsDetail_News;
     ImageView newsDetail_Image;
 
@@ -45,31 +55,43 @@ public class news_detail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_detail);
 
+        //GET THE POSITION (NUMBER) OF THE ITEM IN THE RECYCLERVIEW THAT WAS CLICKED IN THE MAIN
+        // ACTIVITY
         itemPosition = getIntent().getIntExtra("POSITION", 0);
+        news_url = getIntent().getStringExtra("URL");
 
+        //GET THE INSTANCE OF THE VIEW
         newsDetail_Title = findViewById(R.id.newsDetail_Title);
         newDetail_Time_Posted = findViewById(R.id.newDetail_Time_Posted);
         newsDetail_News = findViewById(R.id.newsDetail_News);
         newsDetail_Image = findViewById(R.id.newsDetail_Image);
 
+        //CALL THE METHOD THAT DOES ALL THE WORK IN THIS ACTIVITY
         newsRequest();
     }
 
     public void newsRequest() {
 
+        //USING VOLLEY TO CREATE AN INTERNET CONNECTION AND PARSE THE JSON
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://newsapi.org/v2/everything?q=" + urlLink + "&language=en&sortBy=publishedAt&pageSize=100&apiKey=a5f976b34089493abc8f97f088e5df64", null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
 
+                //I HAD TO SURROUND THIS IN A TRY AND CATCH STATEMENT TO AVOID THE APP CRASHING
                 try {
+                    //GETTING THR ARRAY IN THE JSON THAT HOLD OTHER OBJECT/ARRAY
                     JSONArray jsonArray = response.getJSONArray("articles");
 
-                    //Using a for loop to get the object (data) in the JSON
+                    //USING A FOR-LOOP TI GET THE OBJECT (DATA) IN THE JSON
                     JSONObject jsonObject = jsonArray.getJSONObject(itemPosition);
 
+                    //SET THE TEXT IN THE XML TO THAT OF THE TITLE FROM THE JSON RESPONSE
                     newsDetail_Title.setText(jsonObject.getString(KEY_TITLE));
-                    url = jsonObject.getString(KEY_URL);
+
+                    //newsDetail_News.setText(jsonObject.getString("content"));
+
+                    //url = jsonObject.getString(KEY_URL);
                     Glide.with(getApplicationContext()).load(jsonObject.getString(KEY_URL_TO_IMAGE)).into(newsDetail_Image);
 
                 } catch (JSONException e) {
@@ -87,6 +109,8 @@ public class news_detail extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
         new Thread(new Runnable() {
 
             final StringBuilder builder = new StringBuilder();
@@ -96,13 +120,27 @@ public class news_detail extends AppCompatActivity {
             public void run() {
 
                 try {
-                    Document document = Jsoup.connect(url).get();
+                    String newUrl;
+                    if (!news_url.contains("http")) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                            newUrl = "https://" + news_url;
+                        } else {
+                            newUrl = "http" + news_url;
+                        }
+                    } else {
+                        newUrl = news_url;
+                    }
+                    Document document =
+                            Jsoup.connect(newUrl).followRedirects(true).timeout(600000).get();
                     Elements element = document.select("p");
-                    for (Element paragraph : element) {
+                    /*for (Element paragraph : element) {
                         builder.append(paragraph.text());
                     }
+                    */
+                    //text(),
+                    title = element.eachText().toString();
 
-                    // title = document.title();
+                    //check out document.text
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -112,15 +150,13 @@ public class news_detail extends AppCompatActivity {
 
                     @Override
                     public void run() {
-
-                        newsDetail_News.setText(builder.toString());
-                        // newsDetail_News.setText(title);
-
+                        //newsDetail_News.setText(builder.toString());
+                        newsDetail_News.setText(title);
                     }
                 });
+
             }
         }).start();
     }
-
 }
 

@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".news_detail">
     
-    <ImageView
-        android:id="@+id/newsDetail_Image"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:contentDescription="@string/Recyclerview_ImageContent"
-        android:scaleType="fitCenter" />
+        android:layout_height="wrap_content">
+        
+        
+        <ImageView
+            android:id="@+id/newsDetail_Image"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:contentDescription="@string/Recyclerview_ImageContent"
+            android:scaleType="fitCenter" />
+        
+        <TextView
+            android:id="@+id/newsDetail_Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/newsDetail_Image"
+            android:layout_marginTop="15dp"
+            android:textColor="#F000"
+            android:textSize="20sp" />
+        
+        <TextView
+            android:id="@+id/newDetail_Time_Posted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/newsDetail_Title"
+            android:layout_marginTop="10dp"
+            android:textColor="#F000"
+            android:textSize="15sp" />
+        
+        <TextView
+            android:id="@+id/newsDetail_News"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/newDetail_Time_Posted"
+            android:textColor="#F000"
+            android:textSize="10sp" />
     
-    <TextView
-        android:id="@+id/newsDetail_Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/newsDetail_Image"
-        android:layout_marginTop="15dp"
-        android:textColor="#F000"
-        android:textSize="20sp" />
-    
-    <TextView
-        android:id="@+id/newDetail_Time_Posted"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/newsDetail_Title"
-        android:layout_marginTop="10dp"
-        android:textColor="#F000"
-        android:textSize="15sp" />
-    
-    <TextView
-        android:id="@+id/newsDetail_News"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/newDetail_Time_Posted"
-        android:textColor="#F000"
-        android:textSize="19sp" />
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
 
     //this string is appended to the url
     String urlLink = "buhari";
-
+    String url;
     ArrayList<dataModel> list;
 
     private RecyclerView recyclerView;
@@ -58,6 +58,16 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
         jsonParser();
     }
 
+    @Override
+    public void onItemClick(int position) {
+
+        int mPosition = position;
+        Intent intent = new Intent(this, news_detail.class);
+        intent.putExtra("POSITION", position);
+        intent.putExtra("URL", url);
+        startActivity(intent);
+
+    }
     private void jsonParser() {
 
         final AlertDialog progressDialog = new SpotsDialog(this, R.style.customProgressDialog);
@@ -73,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
 
                     //Using a for loop to get the object (data) in the JSON
                     for (int i = 0; i < jsonArray.length(); i++) {
+
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                         dataModel dataModel = new dataModel();
@@ -101,12 +112,7 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
         requestQueue.add(jsonObjectRequest);
     }
 
-    @Override
-    public void onItemClick(int position) {
 
-        Intent intent = new Intent(this, news_detail.class);
-        intent.putExtra("POSITION", position);
-        startActivity(intent);
-    }
 
 }
+
