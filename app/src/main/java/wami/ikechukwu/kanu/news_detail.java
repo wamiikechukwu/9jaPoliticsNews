@@ -1,5 +1,6 @@
 package wami.ikechukwu.kanu;
 
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
@@ -68,6 +68,7 @@ public class news_detail extends AppCompatActivity {
 
         //CALL THE METHOD THAT DOES ALL THE WORK IN THIS ACTIVITY
         newsRequest();
+        new experiment().execute();
     }
 
     public void newsRequest() {
@@ -89,9 +90,10 @@ public class news_detail extends AppCompatActivity {
                     //SET THE TEXT IN THE XML TO THAT OF THE TITLE FROM THE JSON RESPONSE
                     newsDetail_Title.setText(jsonObject.getString(KEY_TITLE));
 
-                    //newsDetail_News.setText(jsonObject.getString("content"));
+                    //news_url = jsonObject.getString(KEY_URL);
 
-                    //url = jsonObject.getString(KEY_URL);
+                    //newsDetail_News.setText(news_url);
+
                     Glide.with(getApplicationContext()).load(jsonObject.getString(KEY_URL_TO_IMAGE)).into(newsDetail_Image);
 
                 } catch (JSONException e) {
@@ -111,52 +113,59 @@ public class news_detail extends AppCompatActivity {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-        new Thread(new Runnable() {
+    }
 
-            final StringBuilder builder = new StringBuilder();
-            String title;
+    public class experiment extends AsyncTask<Void, Void, Void> {
 
-            @Override
-            public void run() {
+        String title;
+        String newUrl;
 
-                try {
-                    String newUrl;
-                    if (!news_url.contains("http")) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                            newUrl = "https://" + news_url;
-                        } else {
-                            newUrl = "http" + news_url;
-                        }
-                    } else {
-                        newUrl = news_url;
-                    }
-                    Document document =
-                            Jsoup.connect(newUrl).followRedirects(true).timeout(600000).get();
-                    Elements element = document.select("p");
-                    /*for (Element paragraph : element) {
+        @Override
+        protected void onPreExecute() {
+
+            if (!news_url.contains("http")) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    newUrl = "https://" + news_url;
+                } else {
+                    newUrl = "http" + news_url;
+                }
+            } else {
+                newUrl = news_url;
+            }
+
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            try {
+                Document document =
+                        Jsoup.connect(newUrl).followRedirects(true).timeout(600000).get();
+                   /* Elements element = document.select("p");
+                    for (Element paragraph : element) {
                         builder.append(paragraph.text());
                     }
                     */
-                    //text(),
-                    title = element.eachText().toString();
 
-                    //check out document.text
+                title = document.title();
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        //newsDetail_News.setText(builder.toString());
-                        newsDetail_News.setText(title);
-                    }
-                });
-
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        }).start();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+
+            super.onPostExecute(aVoid);
+            newsDetail_News.setText(title);
+
+        }
+
     }
+
 }
 
