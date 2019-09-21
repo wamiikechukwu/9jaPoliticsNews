@@ -25,16 +25,18 @@ import dmax.dialog.SpotsDialog;
 
 public class MainActivity extends AppCompatActivity implements newsAdapter.onclicklistener {
 
-    private final String KEY_AUTHOR = "author";
+    //THESE VARIABLE ARE USED TO GET THE MATCHING RESPONSE FROM THE JSON FROM THE API
     private final String KEY_TITLE = "title";
     private final String KEY_DESCRIPTION = "description";
     private final String KEY_URL = "url";
     private final String KEY_URL_TO_IMAGE = "urlToImage";
     private final String KEY_PUBLISHED_AT = "publishedAt";
 
-    //this string is appended to the url
+    //THIS STRING IS USED TO APPEND THE SEARCH WORD TO THE QUERY
     String urlLink = "buhari";
 
+    //THIS SERVES AS A GLOBAL VARIABLE HOLD THE POSITION (NUMBER/INTEGER) OF THE ITEM CLICKED IN
+    // THE RECYCLERVIEW
     int mPosition;
 
     ArrayList<dataModel> list;

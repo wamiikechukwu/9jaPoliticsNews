@@ -24,7 +24,6 @@ import java.util.Date;
 public class news_detail extends AppCompatActivity {
 
     //THESE VARIABLE ARE USED TO GET THE MATCHING RESPONSE FROM THE JSON FROM THE API
-    // private final String KEY_AUTHOR = "author";
     private final String KEY_TITLE = "title";
     private final String KEY_DESCRIPTION = "description";
     private final String KEY_URL = "url";
@@ -51,7 +50,7 @@ public class news_detail extends AppCompatActivity {
     //THIS METHOD FORMATE THE TIME STAMP FROM THE API INTO AN ORGANIZED TIME STAMP
     public String parseDate(String time) {
 
-        String inputPattern = "yyyy-MM-dd HH:mm:ss";
+        String inputPattern = "yyyy-MM-dd HH:mm:ss"; //2019-09-09T15:01:44Z
         String outputPattern = "dd-MMM-yyyy h:mm a";
         SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
@@ -90,7 +89,10 @@ public class news_detail extends AppCompatActivity {
 
         //CALL THE METHOD THAT DOES ALL THE WORK IN THIS ACTIVITY
         newsRequest();
+
+
     }
+
 
     public void newsRequest() {
 
@@ -119,10 +121,23 @@ public class news_detail extends AppCompatActivity {
                     // WAS CLICKED
                     newsDetail_Title.setText(jsonObject.getString(KEY_TITLE));
 
-                    //SET THE TIME THE NEWS WAS PUBLISHED IN THE API
-                    String TIME = jsonObject.getString(KEY_PUBLISHED_AT);
+                    /**
+                     * THE DATE STAMP FROM THE API, CONTAINS SOME INVALID CHARACTERS, SO I HAD TO
+                     * GET THE VARIOUS TIME IN TWO STRING: DATE AND TIME */
 
-                    String time = parseDate(publishedTime);
+                    //GET THE FULL TIME STRINGS AND PASS THEM INTO TWO SEPARATE STRING
+                    String fullStringOne = jsonObject.getString(KEY_PUBLISHED_AT);
+                    String fullStringTwo = jsonObject.getString(KEY_PUBLISHED_AT);
+
+                    //START GETTING THE VALID PART FROM THE TIME STRING
+                    String dateSubString = fullStringOne.substring(0, 10);
+                    String timeSubString = fullStringTwo.substring(12, 19);
+
+                    //MERGE BOTH VALID TIME STRING TOGETHER
+                    String fullTime = dateSubString + " " + timeSubString;
+
+
+                    String time = parseDate(fullTime);
 
                     newDetail_Time_Posted.setText("Posted by iyke on " + time);
 
