@@ -15,23 +15,36 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:contentDescription="@string/Recyclerview_ImageContent"
-            android:scaleType="fitCenter" />
+            android:scaleType="center" />
         
         <TextView
             android:id="@+id/newsDetail_Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/newsDetail_Image"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:textAlignment="center"
             android:textColor="#F000"
-            android:textSize="20sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    
+        <View
+            android:id="@+id/news_line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/newsDetail_Title"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorPrimaryDark" />
         
         <TextView
             android:id="@+id/newDetail_Time_Posted"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/newsDetail_Title"
-            android:layout_marginTop="10dp"
+            android:layout_below="@id/news_line"
+            android:layout_marginTop="5dp"
+            android:textAlignment="center"
             android:textColor="#F000"
             android:textSize="15sp" />
         
@@ -40,8 +53,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/newDetail_Time_Posted"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="15dp"
+            android:lineSpacingExtra="2dp"
             android:textColor="#F000"
-            android:textSize="10sp" />
+            android:textSize="16sp"
+            android:typeface="sans" />
+    
+        <Button
+            style="@style/Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/newsDetail_News"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="30dp"
+            android:text="Read The Full News"
+            android:typeface="monospace" />
     
     </RelativeLayout>
 </ScrollView>

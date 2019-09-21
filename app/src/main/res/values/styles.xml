@@ -15,5 +15,9 @@
         <item name="DialogSpotCount">8</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+    
+    <style name="Button" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/button_shape</item>
+    </style>
 
 </resources>

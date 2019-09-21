@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
     //this string is appended to the url
     String urlLink = "buhari";
 
-    String url;
-
     int mPosition;
 
     ArrayList<dataModel> list;
@@ -62,17 +60,6 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
         jsonParser();
     }
 
-    @Override
-    public void onItemClick(int position) {
-
-        mPosition = position;
-        Intent intent = new Intent(this, news_detail.class);
-        intent.putExtra("POSITION", position);
-        intent.putExtra("URL", url);
-        startActivity(intent);
-
-    }
-
     private void jsonParser() {
 
         final AlertDialog progressDialog = new SpotsDialog(this, R.style.customProgressDialog);
@@ -91,14 +78,10 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
 
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                        JSONObject JO = jsonArray.getJSONObject(mPosition);
-
                         dataModel dataModel = new dataModel();
                         dataModel.setTitle(jsonObject.getString(KEY_TITLE));
                         dataModel.setImage(jsonObject.getString(KEY_URL_TO_IMAGE));
                         dataModel.setDescrip(jsonObject.getString(KEY_DESCRIPTION));
-
-                        url = JO.getString(KEY_URL);
 
                         list.add(dataModel);
                     }
@@ -122,6 +105,15 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
         requestQueue.add(jsonObjectRequest);
     }
 
+    @Override
+    public void onItemClick(int position) {
+
+        mPosition = position;
+        Intent intent = new Intent(this, news_detail.class);
+        intent.putExtra("POSITION", position);
+        startActivity(intent);
+
+    }
 
 }
 

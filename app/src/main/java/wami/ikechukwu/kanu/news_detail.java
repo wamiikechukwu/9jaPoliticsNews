@@ -1,12 +1,9 @@
 package wami.ikechukwu.kanu;
 
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,23 +16,23 @@ import com.bumptech.glide.Glide;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
-import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class news_detail extends AppCompatActivity {
 
-    //TODO: REMOVE THE UNUSED LINE IF THERE IS NO NEED FOR THEM IN THE APP
     //THESE VARIABLE ARE USED TO GET THE MATCHING RESPONSE FROM THE JSON FROM THE API
     // private final String KEY_AUTHOR = "author";
     private final String KEY_TITLE = "title";
-    //private final String KEY_DESCRIPTION = "description";
+    private final String KEY_DESCRIPTION = "description";
     private final String KEY_URL = "url";
     private final String KEY_URL_TO_IMAGE = "urlToImage";
     private final String KEY_PUBLISHED_AT = "publishedAt";
 
-    //THIS VARIABLE HOLD THE POSITION (NUMBER/INTEGER) OF THE ITEM CLICKED IN THE RECYCLERVIEW
+    //THIS SERVES AS A GLOBAL VARIABLE HOLD THE POSITION (NUMBER/INTEGER) OF THE ITEM CLICKED IN
+    // THE RECYCLERVIEW
     int itemPosition;
 
     //THIS STRING IS APPENDED TO THE URL OF THE API AND IS THE MAIN KEYWORD BEING SEARCHED FOR
@@ -44,14 +41,39 @@ public class news_detail extends AppCompatActivity {
     //THIS STRING IS INTENDED TO HOLD THE URL FROM THE JSON -WHICH IS USED OPEN EACH INDIVIDUAL
     // NEWS PAGE
 
+    //THIS SERVES AS A GLOBAL VARIABLE AND HOLD THE URL OF THE CURRENT ITEM CLICKED ON
     String news_url;
 
     //INSTANCE OF THE XML VIEWS
     TextView newsDetail_Title, newDetail_Time_Posted, newsDetail_News;
     ImageView newsDetail_Image;
 
+    //THIS METHOD FORMATE THE TIME STAMP FROM THE API INTO AN ORGANIZED TIME STAMP
+    public String parseDate(String time) {
+
+        String inputPattern = "yyyy-MM-dd HH:mm:ss";
+        String outputPattern = "dd-MMM-yyyy h:mm a";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+
+        Date date = null;
+        String str = null;
+
+        try {
+            date = inputFormat.parse(time);
+            str = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //HIDE THE ACTION BAR IN THE ACTIVITY SCREEN
+        getSupportActionBar().hide();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_detail);
@@ -59,7 +81,6 @@ public class news_detail extends AppCompatActivity {
         //GET THE POSITION (NUMBER) OF THE ITEM IN THE RECYCLERVIEW THAT WAS CLICKED IN THE MAIN
         // ACTIVITY
         itemPosition = getIntent().getIntExtra("POSITION", 0);
-        news_url = getIntent().getStringExtra("URL");
 
         //GET THE INSTANCE OF THE VIEW
         newsDetail_Title = findViewById(R.id.newsDetail_Title);
@@ -69,13 +90,14 @@ public class news_detail extends AppCompatActivity {
 
         //CALL THE METHOD THAT DOES ALL THE WORK IN THIS ACTIVITY
         newsRequest();
-        new experiment().execute();
     }
 
     public void newsRequest() {
 
         //USING VOLLEY TO CREATE AN INTERNET CONNECTION AND PARSE THE JSON
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://newsapi.org/v2/everything?q=" + urlLink + "&language=en&sortBy=publishedAt&pageSize=100&apiKey=a5f976b34089493abc8f97f088e5df64", null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                "https://newsapi.org/v2/everything?q=" + urlLink + "&language=en&sortBy=publishedAt&pageSize=100&apiKey=a5f976b34089493abc8f97f088e5df64",
+                null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -88,14 +110,24 @@ public class news_detail extends AppCompatActivity {
                     //USING A FOR-LOOP TI GET THE OBJECT (DATA) IN THE JSON
                     JSONObject jsonObject = jsonArray.getJSONObject(itemPosition);
 
-                    //SET THE TEXT IN THE XML TO THAT OF THE TITLE FROM THE JSON RESPONSE
+                    //USED GLIDE TO LOAD THE IMAGE FROM THE JSON INTO THE IMAGE XML THAT WAS CLICKED
+                    Glide.with(getApplicationContext()).
+                            load(jsonObject.getString(KEY_URL_TO_IMAGE)).
+                            into(newsDetail_Image);
+
+                    //SET THE TEXT IN THE XML TO THAT OF THE TITLE FROM THE JSON RESPONSE THAT
+                    // WAS CLICKED
                     newsDetail_Title.setText(jsonObject.getString(KEY_TITLE));
 
-                    //news_url = jsonObject.getString(KEY_URL);
+                    //SET THE TIME THE NEWS WAS PUBLISHED IN THE API
+                    String TIME = jsonObject.getString(KEY_PUBLISHED_AT);
 
-                    //newsDetail_News.setText(news_url);
+                    String time = parseDate(publishedTime);
 
-                    Glide.with(getApplicationContext()).load(jsonObject.getString(KEY_URL_TO_IMAGE)).into(newsDetail_Image);
+                    newDetail_Time_Posted.setText("Posted by iyke on " + time);
+
+                    //THIS GET THE URL FROM THE ITEM THAT WAS CLICKED
+                    newsDetail_News.setText(jsonObject.getString(KEY_DESCRIPTION));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -111,12 +143,11 @@ public class news_detail extends AppCompatActivity {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
     }
 
-    public class experiment extends AsyncTask<Void, Void, Void> {
+//THIS PART OF THIS CODE WAS COMMENTED BECAUSE IT WOULD BE USED LATER
+
+   /* public class experiment extends AsyncTask<Void, Void, String> {
 
         String title;
         String newUrl;
@@ -139,30 +170,31 @@ public class news_detail extends AppCompatActivity {
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected String doInBackground(Void... voids) {
 
             try {
                 Document document =
                         Jsoup.connect(newUrl).followRedirects(true).timeout(600000).get();
-                   /* Elements element = document.select("p");
-                    for (Element paragraph : element) {
-                        builder.append(paragraph.text());
-                    }
-                    */
 
-                title = document.title();
+                   //Elements element = document.select("p");
+                  //  for (Element paragraph : element) {
+                     //   builder.append(paragraph.text());
+                   // }
+
+
+               title = document.title();
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return null;
+            return title;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
+        protected void onPostExecute(String title) {
 
-            super.onPostExecute(aVoid);
-            newsDetail_News.setText(title);
+            super.onPostExecute(title);
+           newsDetail_News.setText(title);
 
         }
 
@@ -174,6 +206,7 @@ public class news_detail extends AppCompatActivity {
         }
 
     }
+    */
 
 }
 
