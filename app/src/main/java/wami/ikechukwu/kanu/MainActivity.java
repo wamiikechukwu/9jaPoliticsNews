@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
                         dataModel.setImage(jsonObject.getString(KEY_URL_TO_IMAGE));
                         dataModel.setDescrip(jsonObject.getString(KEY_DESCRIPTION));
 
-                        url = jsonObject.getString(KEY_URL);
+                        url = JO.getString(KEY_URL);
 
                         list.add(dataModel);
                     }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -163,6 +164,13 @@ public class news_detail extends AppCompatActivity {
             super.onPostExecute(aVoid);
             newsDetail_News.setText(title);
 
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+
+            Toast.makeText(getApplicationContext(), "IS IT WORKING", Toast.LENGTH_SHORT).show();
+            super.onProgressUpdate(values);
         }
 
     }
