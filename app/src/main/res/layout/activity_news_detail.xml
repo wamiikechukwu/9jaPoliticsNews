@@ -39,7 +39,7 @@
             android:background="@color/colorPrimaryDark" />
         
         <TextView
-            android:id="@+id/newDetail_Time_Posted"
+            android:id="@+id/newsDetail_Time_Posted"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/news_line"
@@ -52,18 +52,18 @@
             android:id="@+id/news_line_below"
             android:layout_width="200dp"
             android:layout_height="2dp"
-            android:layout_above="@id/newsDetail_News"
+            android:layout_below="@id/newsDetail_Time_Posted"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="7dp"
             android:background="@color/colorPrimaryDark" />
         
         <TextView
             android:id="@+id/newsDetail_News"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/newDetail_Time_Posted"
+            android:layout_below="@id/news_line_below"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="15dp"
             android:lineSpacingExtra="4dp"
             android:textColor="#F000"
             android:textSize="17sp"
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/newsDetail_News"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp"
             android:text="Read The Full News"
             android:textStyle="bold"

@@ -1,5 +1,6 @@
 package wami.ikechukwu.kanu;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
@@ -20,6 +21,8 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import dmax.dialog.SpotsDialog;
 
 public class news_detail extends AppCompatActivity {
 
@@ -83,7 +86,7 @@ public class news_detail extends AppCompatActivity {
 
         //GET THE INSTANCE OF THE VIEW
         newsDetail_Title = findViewById(R.id.newsDetail_Title);
-        newDetail_Time_Posted = findViewById(R.id.newDetail_Time_Posted);
+        newDetail_Time_Posted = findViewById(R.id.newsDetail_Time_Posted);
         newsDetail_News = findViewById(R.id.newsDetail_News);
         newsDetail_Image = findViewById(R.id.newsDetail_Image);
 
@@ -95,6 +98,9 @@ public class news_detail extends AppCompatActivity {
 
 
     public void newsRequest() {
+
+        final AlertDialog progressDialog = new SpotsDialog(this, R.style.customProgressDialog);
+        progressDialog.show();
 
         //USING VOLLEY TO CREATE AN INTERNET CONNECTION AND PARSE THE JSON
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
@@ -148,6 +154,8 @@ public class news_detail extends AppCompatActivity {
                     e.printStackTrace();
 
                 }
+                progressDialog.dismiss();
+
             }
         }, new Response.ErrorListener() {
 

@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
                 }
             });
             snackbar.show();
+            break;
         }
 
         final AlertDialog progressDialog = new SpotsDialog(this, R.style.customProgressDialog);
