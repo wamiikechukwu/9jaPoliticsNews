@@ -28,7 +28,7 @@ import dmax.dialog.SpotsDialog;
 
 public class news_detail extends AppCompatActivity {
 
-    //THESE VARIABLE ARE USED TO GET THE MATCHING RESPONSE FROM THE JSON FROM THE API
+    //THESE VARIABLE ARE USED TO GET THE MATCHING RESPONSE FROM THE API
     private final String KEY_TITLE = "title";
     private final String KEY_DESCRIPTION = "description";
     private final String KEY_URL = "url";
