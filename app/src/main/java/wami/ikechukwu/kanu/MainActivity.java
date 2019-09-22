@@ -1,12 +1,17 @@
 package wami.ikechukwu.kanu;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -39,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
     // THE RECYCLERVIEW
     int mPosition;
 
+    //THIS ARRAY LIST CONTAINS THE DATA FROM THE JSON, THAT WILL MIND TO THE RECYCLERVIEW
     ArrayList<dataModel> list;
 
     private RecyclerView recyclerView;
@@ -59,7 +65,30 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
         recyclerView.setLayoutManager(mLayout);
         recyclerView.setAdapter(mAdapter);
 
-        jsonParser();
+        if (isConnected()) {
+            jsonParser();
+        } else {
+            Snackbar snackbar = Snackbar.make(recyclerView, "Oops No Internet",
+                    Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    jsonParser();
+                }
+            });
+            snackbar.show();
+        }
+    }
+
+    private boolean isConnected() {
+
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        boolean isconnected = networkInfo != null && networkInfo.isConnectedOrConnecting();
+        return isconnected;
     }
 
     private void jsonParser() {

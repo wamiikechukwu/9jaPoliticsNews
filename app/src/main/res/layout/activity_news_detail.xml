@@ -58,7 +58,7 @@
             android:lineSpacingExtra="4dp"
             android:textColor="#F000"
             android:textSize="17sp"
-            android:typeface="serif" />
+            android:typeface="sans" />
     
         <Button
             style="@style/Button"
