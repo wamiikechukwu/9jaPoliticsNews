@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
     //THIS ARRAY LIST CONTAINS THE DATA FROM THE JSON, THAT WILL MIND TO THE RECYCLERVIEW
     ArrayList<dataModel> list;
 
+    //
     private RecyclerView recyclerView;
     private newsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayout;
