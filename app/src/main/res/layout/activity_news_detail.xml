@@ -47,18 +47,27 @@
             android:textAlignment="center"
             android:textColor="#F000"
             android:textSize="15sp" />
+    
+        <View
+            android:id="@+id/news_line_below"
+            android:layout_width="200dp"
+            android:layout_height="2dp"
+            android:layout_above="@id/newsDetail_News"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorPrimaryDark" />
         
         <TextView
             android:id="@+id/newsDetail_News"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/newDetail_Time_Posted"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="17dp"
             android:lineSpacingExtra="4dp"
             android:textColor="#F000"
             android:textSize="17sp"
-            android:typeface="sans" />
+            android:typeface="monospace" />
     
         <Button
             style="@style/Button"
@@ -68,8 +77,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="30dp"
-            android:textStyle="bold"
             android:text="Read The Full News"
+            android:textStyle="bold"
             android:typeface="monospace" />
     
     </RelativeLayout>

@@ -94,6 +94,19 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
 
     private void jsonParser() {
 
+        while (!isConnected()) {
+            Snackbar snackbar = Snackbar.make(recyclerView, "Oops No Internet",
+                    Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    jsonParser();
+                }
+            });
+            snackbar.show();
+        }
+
         final AlertDialog progressDialog = new SpotsDialog(this, R.style.customProgressDialog);
         progressDialog.show();
 
