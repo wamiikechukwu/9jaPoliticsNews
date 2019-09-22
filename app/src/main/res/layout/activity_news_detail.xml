@@ -36,7 +36,8 @@
             android:layout_height="2dp"
             android:layout_below="@id/newsDetail_Title"
             android:layout_marginTop="5dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/colorPrimaryDark"
+            android:visibility="invisible" />
         
         <TextView
             android:id="@+id/newsDetail_Time_Posted"
@@ -55,7 +56,8 @@
             android:layout_below="@id/newsDetail_Time_Posted"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="7dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/colorPrimaryDark"
+            android:visibility="invisible" />
         
         <TextView
             android:id="@+id/newsDetail_News"
@@ -70,6 +72,7 @@
             android:typeface="monospace" />
     
         <Button
+            android:id="@+id/Button"
             style="@style/Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,10 +80,11 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp"
-            android:text="@string/read_the_full_news"
             android:onClick="readTheFullNews"
+            android:text="@string/read_the_full_news"
             android:textStyle="bold"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            android:visibility="invisible" />
     
     </RelativeLayout>
 </ScrollView>

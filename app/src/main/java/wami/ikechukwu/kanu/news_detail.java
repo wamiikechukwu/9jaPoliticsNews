@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,6 +53,10 @@ public class news_detail extends AppCompatActivity {
     //INSTANCE OF THE XML VIEWS
     TextView newsDetail_Title, newDetail_Time_Posted, newsDetail_News;
     ImageView newsDetail_Image;
+    Button Button;
+
+    View newsDetail_line;
+    View newsDetail_line_below;
 
     //THIS METHOD FORMATE THE TIME STAMP FROM THE API INTO AN ORGANIZED TIME STAMP
     public String parseDate(String time) {
@@ -92,6 +97,10 @@ public class news_detail extends AppCompatActivity {
         newDetail_Time_Posted = findViewById(R.id.newsDetail_Time_Posted);
         newsDetail_News = findViewById(R.id.newsDetail_News);
         newsDetail_Image = findViewById(R.id.newsDetail_Image);
+        newsDetail_line = findViewById(R.id.newsDetail_line);
+        newsDetail_line_below = findViewById(R.id.newsDetail_line_below);
+        Button = findViewById(R.id.Button);
+
 
         //CALL THE METHOD THAT DOES ALL THE WORK IN THIS ACTIVITY
         newsRequest();
@@ -158,12 +167,15 @@ public class news_detail extends AppCompatActivity {
                     //THIS GET THE URL FROM THE ITEM THAT WAS CLICKED
                     newsDetail_News.setText(jsonObject.getString(KEY_DESCRIPTION));
 
+
                 } catch (JSONException e) {
                     e.printStackTrace();
 
                 }
                 progressDialog.dismiss();
-
+                newsDetail_line.setVisibility(View.VISIBLE);
+                newsDetail_line_below.setVisibility(View.VISIBLE);
+                Button.setVisibility(View.VISIBLE);
             }
         }, new Response.ErrorListener() {
 
@@ -182,6 +194,7 @@ public class news_detail extends AppCompatActivity {
         intent.putExtra("URL", mUrl);
         intent.putExtra("IMAGE", sendImage);
         intent.putExtra("TITLE", sendTitle);
+        intent.putExtra("TIME", sendTime);
         startActivity(intent);
     }
 

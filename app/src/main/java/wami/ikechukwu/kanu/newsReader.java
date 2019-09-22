@@ -3,8 +3,13 @@ package wami.ikechukwu.kanu;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,7 +20,18 @@ import java.io.IOException;
 public class newsReader extends AppCompatActivity {
 
     String getUrl;
-    TextView textView;
+    String getImage;
+    String getTime;
+    String getTitle;
+
+    TextView news_text;
+    TextView news_title;
+    TextView news_time;
+    ImageView news_image;
+    View view_line;
+    View view_line_below;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +41,18 @@ public class newsReader extends AppCompatActivity {
         setContentView(R.layout.activity_news_reader);
 
         getUrl = getIntent().getStringExtra("URL");
+        getImage = getIntent().getStringExtra("IMAGE");
+        getTime = getIntent().getStringExtra("TIME");
+        getTitle = getIntent().getStringExtra("TITLE");
+
 
         //GET THE INSTANCE OF THE VIEW ID
-        textView = findViewById(R.id.news_text);
+        news_text = findViewById(R.id.news_text);
+        news_title = findViewById(R.id.news_title);
+        news_time = findViewById(R.id.news_time);
+        news_image = findViewById(R.id.news_image);
+        view_line = findViewById(R.id.news_line);
+        view_line_below = findViewById(R.id.news_line_below);
 
         new experiment().execute();
     }
@@ -39,6 +64,7 @@ public class newsReader extends AppCompatActivity {
 
         String title;
         String newUrl;
+        Snackbar snackbar;
 
         @Override
         protected void onPreExecute() {
@@ -52,6 +78,11 @@ public class newsReader extends AppCompatActivity {
             } else {
                 newUrl = getUrl;
             }
+
+            snackbar = Snackbar.make(findViewById(R.id.newsReaderLayout),
+                    "Please wait, news coming up shortly...", Snackbar.LENGTH_INDEFINITE);
+            snackbar.show();
+
 
             super.onPreExecute();
 
@@ -78,8 +109,13 @@ public class newsReader extends AppCompatActivity {
         protected void onPostExecute(String title) {
 
             super.onPostExecute(title);
-            textView.setText(title);
-
+            news_text.setText(title);
+            news_time.setText(getTime);
+            news_title.setText(getTitle);
+            Glide.with(getApplicationContext()).load(getImage).into(news_image);
+            view_line.setVisibility(View.VISIBLE);
+            view_line_below.setVisibility(View.VISIBLE);
+            snackbar.dismiss();
         }
 
     }
