@@ -1,8 +1,10 @@
 package wami.ikechukwu.kanu;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,8 +42,8 @@ public class news_detail extends AppCompatActivity {
     //THIS STRING IS APPENDED TO THE URL OF THE API AND IS THE MAIN KEYWORD BEING SEARCHED FOR
     String urlLink = "buhari";
 
-    //THIS STRING IS INTENDED TO HOLD THE URL FROM THE JSON -WHICH IS USED OPEN EACH INDIVIDUAL
-    // NEWS PAGE
+    //THIS SERVES AS A GLOBAL VARIABLE HOLD THE URL OF THE ITEM CLICKED IN THE RECYCLERVIEW
+    String mUrl;
 
     //THIS SERVES AS A GLOBAL VARIABLE AND HOLD THE URL OF THE CURRENT ITEM CLICKED ON
     String news_url;
@@ -96,7 +98,6 @@ public class news_detail extends AppCompatActivity {
 
     }
 
-
     public void newsRequest() {
 
         final AlertDialog progressDialog = new SpotsDialog(this, R.style.customProgressDialog);
@@ -117,6 +118,8 @@ public class news_detail extends AppCompatActivity {
 
                     //USING A FOR-LOOP TI GET THE OBJECT (DATA) IN THE JSON
                     JSONObject jsonObject = jsonArray.getJSONObject(itemPosition);
+
+                    mUrl = jsonObject.getString(KEY_URL);
 
                     //USED GLIDE TO LOAD THE IMAGE FROM THE JSON INTO THE IMAGE XML THAT WAS CLICKED
                     Glide.with(getApplicationContext()).
@@ -168,68 +171,12 @@ public class news_detail extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-//THIS PART OF THIS CODE WAS COMMENTED BECAUSE IT WOULD BE USED LATER
+    public void readTheFullNews(View view) {
 
-   /* public class experiment extends AsyncTask<Void, Void, String> {
-
-        String title;
-        String newUrl;
-
-        @Override
-        protected void onPreExecute() {
-
-            if (!news_url.contains("http")) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    newUrl = "https://" + news_url;
-                } else {
-                    newUrl = "http" + news_url;
-                }
-            } else {
-                newUrl = news_url;
-            }
-
-            super.onPreExecute();
-
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-
-            try {
-                Document document =
-                        Jsoup.connect(newUrl).followRedirects(true).timeout(600000).get();
-
-                   //Elements element = document.select("p");
-                  //  for (Element paragraph : element) {
-                     //   builder.append(paragraph.text());
-                   // }
-
-
-               title = document.title();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return title;
-        }
-
-        @Override
-        protected void onPostExecute(String title) {
-
-            super.onPostExecute(title);
-           newsDetail_News.setText(title);
-
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-
-            Toast.makeText(getApplicationContext(), "IS IT WORKING", Toast.LENGTH_SHORT).show();
-            super.onProgressUpdate(values);
-        }
-
+        Intent intent = new Intent(getApplicationContext(), newsReader.class);
+        intent.putExtra("URL", mUrl);
+        startActivity(intent);
     }
-    */
 
 }
 

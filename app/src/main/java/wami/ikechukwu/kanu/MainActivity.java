@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
     //THIS STRING IS USED TO APPEND THE SEARCH WORD TO THE QUERY
     String urlLink = "buhari";
 
-    //THIS SERVES AS A GLOBAL VARIABLE HOLD THE POSITION (NUMBER/INTEGER) OF THE ITEM CLICKED IN
+    //THIS SERVES AS A GLOBAL VARIABLE TO HOLD THE POSITION (NUMBER/INTEGER) OF THE ITEM CLICKED IN
     // THE RECYCLERVIEW
     int mPosition;
 
@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        JSONObject JO = jsonArray.getJSONObject(mPosition);
 
                         dataModel dataModel = new dataModel();
                         dataModel.setTitle(jsonObject.getString(KEY_TITLE));
