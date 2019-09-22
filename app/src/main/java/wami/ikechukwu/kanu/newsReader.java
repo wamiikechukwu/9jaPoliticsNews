@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,6 +25,8 @@ public class newsReader extends AppCompatActivity {
         setContentView(R.layout.activity_news_reader);
 
         getUrl = getIntent().getStringExtra("URL");
+
+        //GET THE INSTANCE OF THE VIEW ID
         textView = findViewById(R.id.news_text);
 
         new experiment().execute();
@@ -79,13 +80,6 @@ public class newsReader extends AppCompatActivity {
             super.onPostExecute(title);
             textView.setText(title);
 
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-
-            Toast.makeText(getApplicationContext(), "IS IT WORKING", Toast.LENGTH_SHORT).show();
-            super.onProgressUpdate(values);
         }
 
     }

@@ -35,18 +35,19 @@ public class news_detail extends AppCompatActivity {
     private final String KEY_URL_TO_IMAGE = "urlToImage";
     private final String KEY_PUBLISHED_AT = "publishedAt";
 
-    //THIS SERVES AS A GLOBAL VARIABLE HOLD THE POSITION (NUMBER/INTEGER) OF THE ITEM CLICKED IN
-    // THE RECYCLERVIEW
+    //THIS SERVES AS A GLOBAL VARIABLE THAT HOLD THE POSITION (NUMBER/INTEGER) OF THE ITEM
+    // CLICKED IN THE RECYCLERVIEW
     int itemPosition;
 
-    //THIS STRING IS APPENDED TO THE URL OF THE API AND IS THE MAIN KEYWORD BEING SEARCHED FOR
+    //THIS STRING APPENDS THE URL OF THE API AND IS THE MAIN KEYWORD BEING SEARCHED FOR USING THE
+    // API
     String urlLink = "buhari";
 
     //THIS SERVES AS A GLOBAL VARIABLE HOLD THE URL OF THE ITEM CLICKED IN THE RECYCLERVIEW
     String mUrl;
 
-    //THIS SERVES AS A GLOBAL VARIABLE AND HOLD THE URL OF THE CURRENT ITEM CLICKED ON
-    String news_url;
+    //THIS VARIABLES HOLD NEWS DATA THAT WILL BE SENT TO THE NEXT ACTIVITY
+    String sendImage, sendTime, sendTitle;
 
     //INSTANCE OF THE XML VIEWS
     TextView newsDetail_Title, newDetail_Time_Posted, newsDetail_News;
@@ -120,6 +121,8 @@ public class news_detail extends AppCompatActivity {
                     JSONObject jsonObject = jsonArray.getJSONObject(itemPosition);
 
                     mUrl = jsonObject.getString(KEY_URL);
+                    sendImage = jsonObject.getString(KEY_URL_TO_IMAGE);
+                    sendTitle = jsonObject.getString(KEY_TITLE);
 
                     //USED GLIDE TO LOAD THE IMAGE FROM THE JSON INTO THE IMAGE XML THAT WAS CLICKED
                     Glide.with(getApplicationContext()).
@@ -150,6 +153,8 @@ public class news_detail extends AppCompatActivity {
 
                     newDetail_Time_Posted.setText("Posted by iyke on " + time);
 
+                    sendTime = "Posted by Iyke on " + time;
+
                     //THIS GET THE URL FROM THE ITEM THAT WAS CLICKED
                     newsDetail_News.setText(jsonObject.getString(KEY_DESCRIPTION));
 
@@ -175,6 +180,8 @@ public class news_detail extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), newsReader.class);
         intent.putExtra("URL", mUrl);
+        intent.putExtra("IMAGE", sendImage);
+        intent.putExtra("TITLE", sendTitle);
         startActivity(intent);
     }
 
