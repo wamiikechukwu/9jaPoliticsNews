@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -30,8 +32,8 @@ public class newsReader extends AppCompatActivity {
     ImageView news_image;
     View view_line;
     View view_line_below;
-
-
+    AdView newsReader_Ad1;
+    AdView newsReader_Ad2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,14 @@ public class newsReader extends AppCompatActivity {
         news_image = findViewById(R.id.news_image);
         view_line = findViewById(R.id.news_line);
         view_line_below = findViewById(R.id.news_line_below);
+        newsReader_Ad1 = findViewById(R.id.news_reader_AD1);
+        newsReader_Ad2 = findViewById(R.id.news_reader_AD2);
+
+        AdRequest adRequest1 = new AdRequest.Builder().build();
+        newsReader_Ad1.loadAd(adRequest1);
+
+        AdRequest adRequest2 = new AdRequest.Builder().build();
+        newsReader_Ad2.loadAd(adRequest2);
 
         new experiment().execute();
     }
