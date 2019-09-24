@@ -18,6 +18,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,11 +61,13 @@ public class news_detail extends AppCompatActivity {
     TextView newsDetail_Title, newDetail_Time_Posted, newsDetail_News, share_text;
     ImageView newsDetail_Image;
     ImageView share_facebook, share_twitter, share_whatsapp, share_instagram, share;
+
     Button Button;
 
     View newsDetail_line;
     View newsDetail_line_below;
 
+    AdView news_detail_AD1;
     //THIS METHOD FORMATE THE TIME STAMP FROM THE API INTO AN ORGANIZED TIME STAMP
     public String parseDate(String time) {
 
@@ -111,6 +115,11 @@ public class news_detail extends AppCompatActivity {
         share_instagram = findViewById(R.id.instagram);
         share_twitter = findViewById(R.id.twitter);
         share_whatsapp = findViewById(R.id.whatsapp);
+        share = findViewById(R.id.share);
+        news_detail_AD1 = findViewById(R.id.news_detail_AD1);
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        news_detail_AD1.loadAd(adRequest);
 
         //CALL THE METHOD THAT DOES ALL THE WORK IN THIS ACTIVITY
         newsRequest();
@@ -189,11 +198,12 @@ public class news_detail extends AppCompatActivity {
                 newsDetail_line.setVisibility(View.VISIBLE);
                 newsDetail_line_below.setVisibility(View.VISIBLE);
                 Button.setVisibility(View.VISIBLE);
+                share_text.setVisibility(View.VISIBLE);
                 share.setVisibility(View.VISIBLE);
-                share_facebook.setVisibility(View.INVISIBLE);
-                share_instagram.setVisibility(View.INVISIBLE);
-                share_instagram.setVisibility(View.INVISIBLE);
-                share_whatsapp.setVisibility(View.INVISIBLE);
+                share_facebook.setVisibility(View.VISIBLE);
+                share_twitter.setVisibility(View.VISIBLE);
+                share_instagram.setVisibility(View.VISIBLE);
+                share_whatsapp.setVisibility(View.VISIBLE);
             }
         }, new Response.ErrorListener() {
 
