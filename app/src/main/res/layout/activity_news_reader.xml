@@ -59,17 +59,18 @@
             android:layout_marginTop="7dp"
             android:background="@color/colorPrimaryDark"
             android:visibility="invisible" />
-        
+    
+    
         <TextView
             android:id="@+id/news_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/news_line_below"
-            android:layout_centerInParent="true"
             android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
             android:lineSpacingExtra="4dp"
             android:textColor="#F000"
             android:textSize="17sp" />
+
     </RelativeLayout>
 </ScrollView>

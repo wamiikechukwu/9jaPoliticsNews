@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
             });
             snackbar.show();
         }
+
     }
 
     private boolean isConnected() {
