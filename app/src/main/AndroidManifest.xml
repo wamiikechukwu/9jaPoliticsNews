@@ -17,8 +17,11 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-9646388292265496~4861803072" />
-        
-        <activity android:name=".newsReader"></activity>
+    
+        <activity
+            android:name=".newsReader"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".news_detail"
             android:label=""
