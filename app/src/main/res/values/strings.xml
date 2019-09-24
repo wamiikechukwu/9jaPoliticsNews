@@ -2,4 +2,6 @@
     <string name="app_name">9ja Breaking New</string>
     <string name="Recyclerview_ImageContent">a thumbnail of the news picture</string>
     <string name="read_the_full_news">Read The Full News</string>
+    <string name="share_news_via">Share News Via</string>
+    <string name="share_images">share images</string>
 </resources>

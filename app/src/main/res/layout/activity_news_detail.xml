@@ -58,18 +58,26 @@
             android:layout_marginTop="7dp"
             android:background="@color/colorPrimaryDark"
             android:visibility="invisible" />
+    
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/news_detail_AD1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/newsDetail_line_below"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="ca-app-pub-9646388292265496/1187756722" />
         
         <TextView
             android:id="@+id/newsDetail_News"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/newsDetail_line_below"
+            android:layout_below="@id/news_detail_AD1"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:lineSpacingExtra="4dp"
             android:textColor="#F000"
             android:textSize="17sp"
-            android:typeface="monospace" />
+            android:typeface="normal" />
     
         <Button
             android:id="@+id/Button"
@@ -79,11 +87,95 @@
             android:layout_below="@id/newsDetail_News"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="15dp"
             android:onClick="readTheFullNews"
             android:text="@string/read_the_full_news"
             android:textStyle="bold"
             android:typeface="monospace"
+            android:visibility="invisible" />
+    
+        <TextView
+            android:id="@+id/shareText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Button"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/share_news_via"
+            android:textColor="#F000"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+    
+        <ImageView
+            android:id="@+id/whatsapp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/Button"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toEndOf="@id/shareText"
+            android:contentDescription="@string/share_images"
+            android:onClick="whatsapp"
+            android:src="@drawable/whatsapp"
+            android:visibility="invisible" />
+    
+        <ImageView
+            android:id="@+id/facebook"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/Button"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toEndOf="@id/whatsapp"
+            android:contentDescription="@string/share_images"
+            android:onClick="facebook"
+            android:src="@drawable/facebook"
+            android:visibility="invisible" />
+    
+        <ImageView
+            android:id="@+id/twitter"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/Button"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toEndOf="@id/facebook"
+            android:contentDescription="@string/share_images"
+            android:onClick="twitter"
+            android:src="@drawable/twitter"
+            android:visibility="invisible" />
+    
+        <ImageView
+            android:id="@+id/instagram"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/Button"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toEndOf="@id/twitter"
+            android:contentDescription="@string/share_images"
+            android:onClick="instagram"
+            android:src="@drawable/instagram"
+            android:visibility="invisible" />
+    
+        <ImageView
+            android:id="@+id/share"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/Button"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toEndOf="@id/instagram"
+            android:contentDescription="@string/share_images"
+            android:onClick="share"
+            android:src="@drawable/ic_share"
             android:visibility="invisible" />
     
     </RelativeLayout>

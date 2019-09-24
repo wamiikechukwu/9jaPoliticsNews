@@ -2,12 +2,14 @@ package wami.ikechukwu.kanu;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -50,9 +52,13 @@ public class news_detail extends AppCompatActivity {
     //THIS VARIABLES HOLD NEWS DATA THAT WILL BE SENT TO THE NEXT ACTIVITY
     String sendImage, sendTime, sendTitle;
 
+    //THIS VARIABLE WILL HOLD A SEPARATE NEWS TEXT FOR SHARING OPTION
+    String newsTextForSharing;
+
     //INSTANCE OF THE XML VIEWS
-    TextView newsDetail_Title, newDetail_Time_Posted, newsDetail_News;
+    TextView newsDetail_Title, newDetail_Time_Posted, newsDetail_News, share_text;
     ImageView newsDetail_Image;
+    ImageView share_facebook, share_twitter, share_whatsapp, share_instagram, share;
     Button Button;
 
     View newsDetail_line;
@@ -100,7 +106,11 @@ public class news_detail extends AppCompatActivity {
         newsDetail_line = findViewById(R.id.newsDetail_line);
         newsDetail_line_below = findViewById(R.id.newsDetail_line_below);
         Button = findViewById(R.id.Button);
-
+        share_text = findViewById(R.id.shareText);
+        share_facebook = findViewById(R.id.facebook);
+        share_instagram = findViewById(R.id.instagram);
+        share_twitter = findViewById(R.id.twitter);
+        share_whatsapp = findViewById(R.id.whatsapp);
 
         //CALL THE METHOD THAT DOES ALL THE WORK IN THIS ACTIVITY
         newsRequest();
@@ -142,6 +152,9 @@ public class news_detail extends AppCompatActivity {
                     // WAS CLICKED
                     newsDetail_Title.setText(jsonObject.getString(KEY_TITLE));
 
+                    //THIS VARIABLE HOLDS PART OF THE NEWS TEXT THAT WILL BE USED FOR SHARING OPTION
+                    newsTextForSharing = jsonObject.getString(KEY_TITLE);
+
                     /**
                      * THE DATE STAMP FROM THE API, CONTAINS SOME INVALID CHARACTERS, SO I HAD TO
                      * GET THE VARIOUS TIME IN TWO STRING: DATE AND TIME */
@@ -176,6 +189,11 @@ public class news_detail extends AppCompatActivity {
                 newsDetail_line.setVisibility(View.VISIBLE);
                 newsDetail_line_below.setVisibility(View.VISIBLE);
                 Button.setVisibility(View.VISIBLE);
+                share.setVisibility(View.VISIBLE);
+                share_facebook.setVisibility(View.INVISIBLE);
+                share_instagram.setVisibility(View.INVISIBLE);
+                share_instagram.setVisibility(View.INVISIBLE);
+                share_whatsapp.setVisibility(View.INVISIBLE);
             }
         }, new Response.ErrorListener() {
 
@@ -196,6 +214,97 @@ public class news_detail extends AppCompatActivity {
         intent.putExtra("TITLE", sendTitle);
         intent.putExtra("TIME", sendTime);
         startActivity(intent);
+    }
+
+    public void whatsapp(View view) {
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+
+        try {
+
+            getPackageManager().getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA);
+            intent.setPackage("com.whatsapp");
+            intent.putExtra(Intent.EXTRA_TEXT, " " + newsTextForSharing + " " + mUrl);
+            startActivity(Intent.createChooser(intent, "Share with"));
+
+        } catch (PackageManager.NameNotFoundException e) {
+
+            Toast toast = Toast.makeText(this, "WhatsApp not Installed", Toast.LENGTH_LONG);
+            toast.show();
+
+        }
+    }
+
+    public void facebook(View view) {
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+
+        try {
+
+            getPackageManager().getPackageInfo("com.facebook.lite",
+                    PackageManager.GET_META_DATA);
+            intent.setPackage("com.facebook.lite");
+            intent.putExtra(Intent.EXTRA_TEXT, " " + newsTextForSharing + " " + mUrl);
+            startActivity(Intent.createChooser(intent, "Share with"));
+
+        } catch (PackageManager.NameNotFoundException e) {
+
+            Toast toast = Toast.makeText(this, "Facebook Lite not Installed", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
+    public void twitter(View view) {
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+
+        try {
+
+            getPackageManager().getPackageInfo("com.twitter.android",
+                    PackageManager.GET_META_DATA);
+            intent.setPackage("com.twitter.android");
+            intent.putExtra(Intent.EXTRA_TEXT, " " + newsTextForSharing + " " + mUrl);
+            startActivity(Intent.createChooser(intent, "Share with"));
+
+        } catch (PackageManager.NameNotFoundException e) {
+
+            Toast toast = Toast.makeText(this, "Twitter not Installed", Toast.LENGTH_SHORT);
+            toast.show();
+
+        }
+    }
+
+    public void instagram(View view) {
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+
+        try {
+
+            getPackageManager().getPackageInfo("com.instagram.android",
+                    PackageManager.GET_META_DATA);
+            intent.setPackage("com.instagram.android");
+            intent.putExtra(Intent.EXTRA_TEXT, " " + newsTextForSharing + " " + mUrl);
+            startActivity(Intent.createChooser(intent, "Share with"));
+
+        } catch (PackageManager.NameNotFoundException e) {
+
+            Toast toast = Toast.makeText(this, "Instagram not Installed", Toast.LENGTH_SHORT);
+            toast.show();
+
+        }
+
+    }
+
+    public void share(View view) {
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, " " + newsTextForSharing + " " + mUrl);
+        startActivity(Intent.createChooser(intent, "Share with "));
     }
 
 }
