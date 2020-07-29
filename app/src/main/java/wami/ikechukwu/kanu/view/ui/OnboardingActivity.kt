@@ -1,7 +1,8 @@
-package wami.ikechukwu.kanu
+package wami.ikechukwu.kanu.view.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import wami.ikechukwu.kanu.R
 
 class OnboardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,29 +1,33 @@
-package wami.ikechukwu.kanu;
+package wami.ikechukwu.kanu.viewmodel;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import wami.ikechukwu.kanu.R;
+import wami.ikechukwu.kanu.model.OnboardingModel;
+
 public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
 
-    private ArrayList<dataModel> mDataModel;
+    private ArrayList<OnboardingModel> mOnboardingModel;
     private Context context;
     private onclicklistener clicklistener;
 
-    public newsAdapter(Context context, ArrayList<dataModel> mDataModel, onclicklistener clicklistener) {
+    public newsAdapter(Context context, ArrayList<OnboardingModel> mOnboardingModel, onclicklistener clicklistener) {
 
         this.context = context;
-        this.mDataModel = mDataModel;
+        this.mOnboardingModel = mOnboardingModel;
         this.clicklistener = clicklistener;
     }
 
@@ -40,17 +44,17 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final newsAdapter.viewHolder viewHolder, final int i) {
 
-        dataModel dataModel = mDataModel.get(i);
-        viewHolder.mTextView.setText(dataModel.getTitle());
-        viewHolder.mTextDescrip.setText(dataModel.getDescrip());
-        Glide.with(context).load(dataModel.getImage()).into(viewHolder.mImageView);
+        OnboardingModel OnboardingModel = mOnboardingModel.get(i);
+        viewHolder.mTextView.setText(OnboardingModel.getTitle());
+        viewHolder.mTextDescrip.setText(OnboardingModel.getDescrip());
+        Glide.with(context).load(OnboardingModel.getImage()).into(viewHolder.mImageView);
 
     }
 
     @Override
     public int getItemCount() {
 
-        return mDataModel.size();
+        return mOnboardingModel.size();
     }
 
     public interface onclicklistener {
