@@ -9,7 +9,7 @@ class OnboardingAdapter(private val onboardingArrayList: ArrayList<OnboardingMod
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OnboardingAdapter.ViewHolder {
-
+        return View
     }
 
     override fun getItemCount(): Int {
