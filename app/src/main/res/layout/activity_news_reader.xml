@@ -4,13 +4,13 @@
     android:id="@+id/newsReaderLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".newsReader">
-    
+    tools:context=".viewmodel.newsReader">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        
-        
+
+
         <ImageView
             android:id="@+id/news_image"
             android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package wami.ikechukwu.kanu;
+package wami.ikechukwu.kanu.view.ui;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +28,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
+import wami.ikechukwu.kanu.R;
+import wami.ikechukwu.kanu.model.OnboardingModel;
+import wami.ikechukwu.kanu.viewmodel.newsAdapter;
+import wami.ikechukwu.kanu.viewmodel.news_detail;
 
 public class MainActivity extends AppCompatActivity implements newsAdapter.onclicklistener {
 
@@ -45,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
     int mPosition;
 
     //THIS ARRAY LIST CONTAINS THE DATA FROM THE JSON, THAT WILL MIND TO THE RECYCLERVIEW
-    ArrayList<dataModel> list;
+    ArrayList<OnboardingModel> list;
 
     //
     private RecyclerView recyclerView;
@@ -126,12 +131,12 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         JSONObject JO = jsonArray.getJSONObject(mPosition);
 
-                        dataModel dataModel = new dataModel();
-                        dataModel.setTitle(jsonObject.getString(KEY_TITLE));
-                        dataModel.setImage(jsonObject.getString(KEY_URL_TO_IMAGE));
-                        dataModel.setDescrip(jsonObject.getString(KEY_DESCRIPTION));
+                        OnboardingModel OnboardingModel = new OnboardingModel();
+                        OnboardingModel.setTitle(jsonObject.getString(KEY_TITLE));
+                        OnboardingModel.setImage(jsonObject.getString(KEY_URL_TO_IMAGE));
+                        OnboardingModel.setDescrip(jsonObject.getString(KEY_DESCRIPTION));
 
-                        list.add(dataModel);
+                        list.add(OnboardingModel);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
