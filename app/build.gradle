@@ -37,6 +37,13 @@ dependencies {
 
     //VIEW PAGER 2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
+    //VIEW MODEL
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$view_model_version"
+
+    //LIVE DATA
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$live_data_version"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     testImplementation 'junit:junit:4.13'
