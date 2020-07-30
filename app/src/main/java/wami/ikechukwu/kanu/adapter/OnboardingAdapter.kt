@@ -1,4 +1,4 @@
-package wami.ikechukwu.kanu
+package wami.ikechukwu.kanu.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import wami.ikechukwu.kanu.R
 import wami.ikechukwu.kanu.model.OnboardingModel
 
 class OnboardingAdapter(private val onboardingArrayList: ArrayList<OnboardingModel>) : RecyclerView.Adapter<OnboardingAdapter.ViewHolder>() {
@@ -19,7 +20,7 @@ class OnboardingAdapter(private val onboardingArrayList: ArrayList<OnboardingMod
         val cardView: CardView = itemView.findViewById(R.id.onboarding_item_cardview)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OnboardingAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context).inflate(R.layout.onboarding_item, parent, false)
         return ViewHolder(layoutInflater)
     }
@@ -28,7 +29,7 @@ class OnboardingAdapter(private val onboardingArrayList: ArrayList<OnboardingMod
         return onboardingArrayList.size
     }
 
-    override fun onBindViewHolder(holder: OnboardingAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
 //        GETTING THE INDEX POSITION OF THE ARRAYLIST
         val dataModel: OnboardingModel = onboardingArrayList[position]
@@ -45,7 +46,6 @@ class OnboardingAdapter(private val onboardingArrayList: ArrayList<OnboardingMod
 
         val cardviewColor = holder.cardView
         cardviewColor.setCardBackgroundColor(dataModel.onboardColor)
-
     }
 
 

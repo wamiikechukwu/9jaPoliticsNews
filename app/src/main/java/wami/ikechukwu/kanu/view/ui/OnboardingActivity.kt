@@ -25,7 +25,11 @@ class OnboardingActivity : AppCompatActivity() {
 
         onboardViewModel = ViewModelProvider(this)[OnboardingViewModel::class.java]
 
+        onboardViewModel.initTheDataModel()
 
+        onboardViewModel.initTheAdapter()
+
+        binding.onboardingViewpager2.adapter
     }
 
 }
