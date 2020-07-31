@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
+import com.bumptech.glide.Glide
 import wami.ikechukwu.kanu.R
 import wami.ikechukwu.kanu.model.OnboardingModel
 
@@ -15,62 +15,35 @@ class OnboardingAdapter(private var onboardingArrayList: ArrayList<OnboardingMod
 
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        TODO("Not yet implemented")
+        return view == `object`
     }
 
     override fun getCount(): Int {
         return onboardingArrayList.size
     }
 
-
-    init {
-        setItem(onboardingArrayList)
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        container.removeView(`object` as View)
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        constructor(parent: ViewGroup) : this(LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.onboarding_item, parent, false))
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
 
+        val mView = LayoutInflater.from(container.context).inflate(R.layout.onboarding_item, container, false)
+        val onTitle: TextView = mView.findViewById(R.id.onboard_item_title)
+        onTitle.text = onboardingArrayList[position].onboardTitle
 
-        val title: TextView = itemView.findViewById(R.id.onboard_item_title)
-        val subTitle: TextView = itemView.findViewById(R.id.onboard_item_subtitle)
-        val image: ImageView = itemView.findViewById(R.id.onboard_item_image)
-        val cardView: CardView = itemView.findViewById(R.id.onboarding_item_cardview)
+        val onSubtitle: TextView = mView.findViewById(R.id.onboard_item_subtitle)
+        onSubtitle.text = onboardingArrayList[position].onboardSubTitle
 
-    }
+        val onImage: ImageView = mView.findViewById(R.id.onboard_item_image)
+        Glide.with(container.context).load(onboardingArrayList[position].onboardImage).into(onImage)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(parent)
-    }
+        val onCard: CardView = mView.findViewById(R.id.onboarding_item_cardview)
+        onCard.setCardBackgroundColor(onboardingArrayList[position].onboardColor)
 
-    override fun getItemCount(): Int {
-        return onboardingArrayList.size
-    }
+        container.addView(mView, 0)
+        return mView
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-//        GETTING THE INDEX POSITION OF THE ARRAYLIST
-        val dataModelPosition: OnboardingModel = onboardingArrayList[position]
-
-//      SETTING THE TEXT REFERENCE WITH THE TEXT GOTTEN FROM THE ARRAYLIST
-        val titleText = holder.title
-        titleText.text = dataModelPosition.onboardTitle
-
-        val subTitleText = holder.subTitle
-        subTitleText.text = dataModelPosition.onboardSubTitle
-
-        val image = holder.image
-        image.setImageResource(dataModelPosition.onboardImage)
-
-        val cardviewColor = holder.cardView
-        cardviewColor.setCardBackgroundColor(dataModelPosition.onboardColor)
-
-    }
-
-    private fun setItem(onboardingArrayList: ArrayList<OnboardingModel>) {
-        this.onboardingArrayList = onboardingArrayList
-        notifyDataSetChanged()
     }
 
 }
