@@ -7,21 +7,37 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.PagerAdapter
 import wami.ikechukwu.kanu.R
 import wami.ikechukwu.kanu.model.OnboardingModel
 
-class OnboardingAdapter(private val onboardingArrayList: ArrayList<OnboardingModel>) : RecyclerView.Adapter<OnboardingAdapter.ViewHolder>() {
+class OnboardingAdapter(private var onboardingArrayList: ArrayList<OnboardingModel>) : PagerAdapter() {
 
+
+    override fun isViewFromObject(view: View, `object`: Any): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun getCount(): Int {
+        return onboardingArrayList.size
+    }
+
+
+    init {
+        setItem(onboardingArrayList)
+    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         constructor(parent: ViewGroup) : this(LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.onboarding_item, parent, false))
 
+
         val title: TextView = itemView.findViewById(R.id.onboard_item_title)
         val subTitle: TextView = itemView.findViewById(R.id.onboard_item_subtitle)
         val image: ImageView = itemView.findViewById(R.id.onboard_item_image)
         val cardView: CardView = itemView.findViewById(R.id.onboarding_item_cardview)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -49,8 +65,13 @@ class OnboardingAdapter(private val onboardingArrayList: ArrayList<OnboardingMod
 
         val cardviewColor = holder.cardView
         cardviewColor.setCardBackgroundColor(dataModelPosition.onboardColor)
+
     }
 
+    private fun setItem(onboardingArrayList: ArrayList<OnboardingModel>) {
+        this.onboardingArrayList = onboardingArrayList
+        notifyDataSetChanged()
+    }
 
 }
 

@@ -18,4 +18,5 @@ class OnboardingViewModel : ViewModel() {
     fun initTheAdapter(): OnboardingAdapter {
         return OnboardingAdapter(mArrayList)
     }
+    
 }

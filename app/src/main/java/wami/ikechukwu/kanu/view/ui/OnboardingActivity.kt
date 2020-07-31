@@ -30,9 +30,31 @@ class OnboardingActivity : AppCompatActivity() {
         onboardViewModel.initTheAdapter()
 
 
-        val ik: ViewPager2 = findViewById(R.id.onboarding_viewpager2)
+        var ik: ViewPager2 = findViewById(R.id.onboarding_viewpager2)
         ik.adapter = onboardViewModel.initTheAdapter()
+        //ik.setPadding(40,0,40,0)
+
+        // val marginPageTransformer = MarginPageTransformer(50)
+
+//        ik.setPageTransformer(CompositePageTransformer().also {
+//
+//            //it.addTransformer(marginPageTransformer)
+//
+//          it.addTransformer(transformer)
+//        })
 
     }
 
+
+    val transformer = ViewPager2.PageTransformer { page, position ->
+        page.apply {
+//          translationX = Math.abs(position) * 100f
+//           scaleX = 1f
+//           scaleY
+        }
+    }
+
+
 }
+
+
