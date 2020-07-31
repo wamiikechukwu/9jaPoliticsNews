@@ -131,12 +131,12 @@ public class MainActivity extends AppCompatActivity implements newsAdapter.oncli
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         JSONObject JO = jsonArray.getJSONObject(mPosition);
 
-                        OnboardingModel OnboardingModel = new OnboardingModel();
-                        OnboardingModel.setTitle(jsonObject.getString(KEY_TITLE));
-                        OnboardingModel.setImage(jsonObject.getString(KEY_URL_TO_IMAGE));
-                        OnboardingModel.setDescrip(jsonObject.getString(KEY_DESCRIPTION));
+//                        OnboardingModel OnboardingModel = new OnboardingModel();
+//                        OnboardingModel.setTitle(jsonObject.getString(KEY_TITLE));
+//                        OnboardingModel.setImage(jsonObject.getString(KEY_URL_TO_IMAGE));
+//                        OnboardingModel.setDescrip(jsonObject.getString(KEY_DESCRIPTION));
 
-                        list.add(OnboardingModel);
+//                        list.add(OnboardingModel);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

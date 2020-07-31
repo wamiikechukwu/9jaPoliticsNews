@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 
 import wami.ikechukwu.kanu.R;
@@ -44,10 +42,10 @@ public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final newsAdapter.viewHolder viewHolder, final int i) {
 
-        OnboardingModel OnboardingModel = mOnboardingModel.get(i);
-        viewHolder.mTextView.setText(OnboardingModel.getTitle());
-        viewHolder.mTextDescrip.setText(OnboardingModel.getDescrip());
-        Glide.with(context).load(OnboardingModel.getImage()).into(viewHolder.mImageView);
+//        OnboardingModel OnboardingModel = mOnboardingModel.get(i);
+//        viewHolder.mTextView.setText(OnboardingModel.getTitle());
+//        viewHolder.mTextDescrip.setText(OnboardingModel.getDescrip());
+//        Glide.with(context).load(OnboardingModel.getImage()).into(viewHolder.mImageView);
 
     }
 

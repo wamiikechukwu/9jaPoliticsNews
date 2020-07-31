@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "wami.ikechukwu.kanu"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -16,6 +16,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -33,6 +37,13 @@ dependencies {
 
     //VIEW PAGER 2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
+    //VIEW MODEL
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$view_model_version"
+
+    //LIVE DATA
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$live_data_version"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     testImplementation 'junit:junit:4.13'
