@@ -4,6 +4,7 @@ package wami.ikechukwu.kanu.view.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import wami.ikechukwu.kanu.R
 import wami.ikechukwu.kanu.viewmodel.OnboardingViewModel
@@ -30,9 +31,9 @@ class OnboardingActivity : AppCompatActivity() {
         onboardViewModel.initTheAdapter()
 
 
-        var ik: ViewPager2 = findViewById(R.id.onboarding_viewpager2)
+        val ik: ViewPager = findViewById(R.id.onboarding_viewpager2)
         ik.adapter = onboardViewModel.initTheAdapter()
-        //ik.setPadding(40,0,40,0)
+        ik.setPadding(40, 0, 40, 0)
 
         // val marginPageTransformer = MarginPageTransformer(50)
 
