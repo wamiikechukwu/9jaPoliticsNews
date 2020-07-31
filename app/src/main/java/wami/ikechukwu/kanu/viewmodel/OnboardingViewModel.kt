@@ -15,7 +15,7 @@ class OnboardingViewModel : ViewModel() {
         mArrayList.add(OnboardingModel("Read", "Learn", R.drawable.git2, R.color.colorPrimary))
     }
 
-    fun initTheAdapter() {
-        val mAdapter: OnboardingAdapter = OnboardingAdapter(mArrayList)
+    fun initTheAdapter(): OnboardingAdapter {
+        return OnboardingAdapter(mArrayList)
     }
 }

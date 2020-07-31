@@ -14,6 +14,10 @@ class OnboardingAdapter(private val onboardingArrayList: ArrayList<OnboardingMod
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        constructor(parent: ViewGroup) : this(LayoutInflater
+                .from(parent.context)
+                .inflate(R.layout.onboarding_item, parent, false))
+
         val title: TextView = itemView.findViewById(R.id.onboard_item_title)
         val subTitle: TextView = itemView.findViewById(R.id.onboard_item_subtitle)
         val image: ImageView = itemView.findViewById(R.id.onboard_item_image)
@@ -21,8 +25,7 @@ class OnboardingAdapter(private val onboardingArrayList: ArrayList<OnboardingMod
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context).inflate(R.layout.onboarding_item, parent, false)
-        return ViewHolder(layoutInflater)
+        return ViewHolder(parent)
     }
 
     override fun getItemCount(): Int {
@@ -32,20 +35,20 @@ class OnboardingAdapter(private val onboardingArrayList: ArrayList<OnboardingMod
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
 //        GETTING THE INDEX POSITION OF THE ARRAYLIST
-        val dataModel: OnboardingModel = onboardingArrayList[position]
+        val dataModelPosition: OnboardingModel = onboardingArrayList[position]
 
 //      SETTING THE TEXT REFERENCE WITH THE TEXT GOTTEN FROM THE ARRAYLIST
         val titleText = holder.title
-        titleText.text = dataModel.onboardTitle
+        titleText.text = dataModelPosition.onboardTitle
 
         val subTitleText = holder.subTitle
-        subTitleText.text = dataModel.onboardSubTitle
+        subTitleText.text = dataModelPosition.onboardSubTitle
 
         val image = holder.image
-        image.setImageResource(dataModel.onboardImage)
+        image.setImageResource(dataModelPosition.onboardImage)
 
         val cardviewColor = holder.cardView
-        cardviewColor.setCardBackgroundColor(dataModel.onboardColor)
+        cardviewColor.setCardBackgroundColor(dataModelPosition.onboardColor)
     }
 
 
