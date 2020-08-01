@@ -1,6 +1,7 @@
 package wami.ikechukwu.kanu.view.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -44,6 +45,17 @@ class OnboardingActivity : AppCompatActivity() {
             binding.onboardingViewpager.currentItem = currentViewPagerPosition
         }
 
+        fun viewVisibility() {
+//            SET THE GET STARTED BUTTON TO BE VISIBLE
+            binding.getStartedButton.visibility = View.VISIBLE
+
+//            SET THE NEXT BUTTON INVISIBLE
+            binding.onboardingNextButton.visibility = View.INVISIBLE
+
+//            SET THE TAB LAYOUT INVISIBLE
+            binding.onboardingTabLayout.visibility = View.INVISIBLE
+        }
+
 //      WHEN THE NEXT BUTTON IS CLICKED DO THE FOLLOWING
         binding.onboardingNextButton.setOnClickListener {
 
@@ -51,6 +63,10 @@ class OnboardingActivity : AppCompatActivity() {
                 currentViewPagerPosition++
 
                 setCurrentPosition()
+            }
+
+            if (currentViewPagerPosition == onboardViewModel.onArrayListSize()) {
+                viewVisibility()
             }
 
         }
