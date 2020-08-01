@@ -62,6 +62,11 @@ class OnboardingActivity : AppCompatActivity() {
 
         }
 
+//
+        binding.getStartedButton.setOnClickListener {
+
+        }
+
     }
 
     private fun getStartedButtonAnimation() {
