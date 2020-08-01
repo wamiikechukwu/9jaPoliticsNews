@@ -2,6 +2,8 @@ package wami.ikechukwu.kanu.view.ui
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +21,9 @@ class OnboardingActivity : AppCompatActivity() {
 
     //    CURRENT VIEW PAGER ADAPTER POSITION
     var currentViewPagerPosition = 0
+
+    //    GET STARTED BUTTON ANIMATION
+    lateinit var getStartedBtnAnim: Animation
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,21 +46,6 @@ class OnboardingActivity : AppCompatActivity() {
 //        SET THE CURRENT ITEM FROM THE VIEWPAGER
         currentViewPagerPosition = binding.onboardingViewpager.currentItem
 
-        fun setCurrentPosition() {
-            binding.onboardingViewpager.currentItem = currentViewPagerPosition
-        }
-
-        fun viewVisibility() {
-//            SET THE GET STARTED BUTTON TO BE VISIBLE
-            binding.getStartedButton.visibility = View.VISIBLE
-
-//            SET THE NEXT BUTTON INVISIBLE
-            binding.onboardingNextButton.visibility = View.INVISIBLE
-
-//            SET THE TAB LAYOUT INVISIBLE
-            binding.onboardingTabLayout.visibility = View.INVISIBLE
-        }
-
 //      WHEN THE NEXT BUTTON IS CLICKED DO THE FOLLOWING
         binding.onboardingNextButton.setOnClickListener {
 
@@ -67,10 +57,31 @@ class OnboardingActivity : AppCompatActivity() {
 
             if (currentViewPagerPosition == onboardViewModel.onArrayListSize()) {
                 viewVisibility()
+                getStartedButtonAnimation()
             }
 
         }
 
+    }
+
+    private fun getStartedButtonAnimation() {
+        getStartedBtnAnim = AnimationUtils.loadAnimation(applicationContext, R.anim.getstarted_btn_anim)
+        binding.getStartedButton.animation = getStartedBtnAnim
+    }
+
+    private fun setCurrentPosition() {
+        binding.onboardingViewpager.currentItem = currentViewPagerPosition
+    }
+
+    private fun viewVisibility() {
+//            SET THE GET STARTED BUTTON TO BE VISIBLE
+        binding.getStartedButton.visibility = View.VISIBLE
+
+//            SET THE NEXT BUTTON INVISIBLE
+        binding.onboardingNextButton.visibility = View.INVISIBLE
+
+//            SET THE TAB LAYOUT INVISIBLE
+        binding.onboardingTabLayout.visibility = View.INVISIBLE
     }
 }
 
