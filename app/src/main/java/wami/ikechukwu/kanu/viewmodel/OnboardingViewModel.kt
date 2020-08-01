@@ -9,8 +9,12 @@ class OnboardingViewModel : ViewModel() {
     //    DECLARED ARRAYLIST
     private val onArrayList: ArrayList<OnboardingModel> = ArrayList()
 
+    init {
+        initDataModelForTheOnboarding()
+    }
+
     //SETTING UP THE ARRAYLIST
-    fun initDataModelForTheOnboarding() {
+    private fun initDataModelForTheOnboarding() {
         onArrayList.add(OnboardingModel("Get The Latest New", "Read them all new", R.drawable.git2, R.color.firstColor))
         onArrayList.add(OnboardingModel("Be updated", "Be inspire", R.drawable.git2, R.color.secondColor))
         onArrayList.add(OnboardingModel("Read", "Learn", R.drawable.git2, R.color.thirdColor))
@@ -22,4 +26,7 @@ class OnboardingViewModel : ViewModel() {
         return OnboardingAdapter(onArrayList)
     }
 
+    fun onArrayListSize(): Int {
+        return onArrayList.size
+    }
 }

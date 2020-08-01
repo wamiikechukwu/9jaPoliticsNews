@@ -16,6 +16,10 @@ class OnboardingActivity : AppCompatActivity() {
     //    FOR THE VIEW MODEL
     private lateinit var onboardViewModel: OnboardingViewModel
 
+    //    CURRENT VIEW PAGER ADAPTER POSITION
+    var currentViewPagerPosition = 0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,15 +32,28 @@ class OnboardingActivity : AppCompatActivity() {
 //        ACCESSING THE VIEW MODEL CLASS
         onboardViewModel = ViewModelProvider(this)[OnboardingViewModel::class.java]
 
-//        CALLING THE FUNCTION IN THE VIEW MODEL CLASS
-        onboardViewModel.initDataModelForTheOnboarding()
-
-//        CALL A METHOD IN THE VIEW MODEL CLASS
-        onboardViewModel.initTheAdapter()
-
 //        VIEWPAGER WIDGET FROM THE LAYOUT
         binding.onboardingViewpager.adapter = onboardViewModel.initTheAdapter()
+        binding.onboardingTabLayout.setupWithViewPager(binding.onboardingViewpager)
         binding.onboardingViewpager.setPadding(40, 0, 40, 0)
+
+//        SET THE CURRENT ITEM FROM THE VIEWPAGER
+        currentViewPagerPosition = binding.onboardingViewpager.currentItem
+
+        fun setCurrentPosition() {
+            binding.onboardingViewpager.currentItem = currentViewPagerPosition
+        }
+
+//      WHEN THE NEXT BUTTON IS CLICKED DO THE FOLLOWING
+        binding.onboardingNextButton.setOnClickListener {
+
+            if (currentViewPagerPosition < onboardViewModel.onArrayListSize()) {
+                currentViewPagerPosition++
+
+                setCurrentPosition()
+            }
+
+        }
 
     }
 }
