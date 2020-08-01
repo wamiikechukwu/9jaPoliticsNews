@@ -16,7 +16,6 @@ class OnboardingActivity : AppCompatActivity() {
     //    FOR THE VIEW MODEL
     private lateinit var onboardViewModel: OnboardingViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,7 +29,7 @@ class OnboardingActivity : AppCompatActivity() {
         onboardViewModel = ViewModelProvider(this)[OnboardingViewModel::class.java]
 
 //        CALLING THE FUNCTION IN THE VIEW MODEL CLASS
-        onboardViewModel.initTheDataModel()
+        onboardViewModel.initDataModelForTheOnboarding()
 
 //        CALL A METHOD IN THE VIEW MODEL CLASS
         onboardViewModel.initTheAdapter()

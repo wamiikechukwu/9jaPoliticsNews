@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import wami.ikechukwu.kanu.R
@@ -29,6 +30,8 @@ class OnboardingAdapter(private var onboardingArrayList: ArrayList<OnboardingMod
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
 
         val mView = LayoutInflater.from(container.context).inflate(R.layout.onboarding_item, container, false)
+
+//        FIND THE VIEW AND SET THE VIEW TO DISPLAY VALUES FROM THE ARRAYLIST
         val onTitle: TextView = mView.findViewById(R.id.onboard_item_title)
         onTitle.text = onboardingArrayList[position].onboardTitle
 
@@ -39,7 +42,7 @@ class OnboardingAdapter(private var onboardingArrayList: ArrayList<OnboardingMod
         Glide.with(container.context).load(onboardingArrayList[position].onboardImage).into(onImage)
 
         val onCard: CardView = mView.findViewById(R.id.onboarding_item_cardview)
-        onCard.setCardBackgroundColor(onboardingArrayList[position].onboardColor)
+        onCard.setCardBackgroundColor(ContextCompat.getColor(container.context, onboardingArrayList[position].onboardColor))
 
         container.addView(mView, 0)
         return mView

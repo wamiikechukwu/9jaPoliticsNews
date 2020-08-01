@@ -14,9 +14,13 @@
             android:id="@+id/onboarding_welcome_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/gotham_bold"
             android:text="Welcome"
-            app:layout_constraintBottom_toTopOf="@id/onboarding_viewpager2"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:textColor="#000"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/onboarding_viewpager"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,12 +28,14 @@
             android:id="@+id/onboarding_skip_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="skip"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/gotham_bold"
             app:layout_constraintBaseline_toBaselineOf="@id/onboarding_welcome_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
-            />
+            android:text="Skip"
+            android:textColor="#000"
+            android:textSize="18sp" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/onboarding_viewpager"
@@ -46,13 +52,13 @@
             app:layout_constraintTop_toBottomOf="@id/onboarding_welcome_text" />
 
         <com.google.android.material.tabs.TabLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:id="@+id/onboarding_tab_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/onboarding_next_button"
-            app:layout_constraintEnd_toStartOf="@id/onboarding_viewpager2"
+            app:layout_constraintEnd_toStartOf="@id/onboarding_next_button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/onboarding_next_button"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="@id/onboarding_next_button" />
 
         <Button
             android:id="@+id/onboarding_next_button"
@@ -62,7 +68,7 @@
             android:layout_marginBottom="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/onboarding_viewpager2" />
+            app:layout_constraintTop_toBottomOf="@id/onboarding_viewpager" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
