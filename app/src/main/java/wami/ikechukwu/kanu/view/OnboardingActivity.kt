@@ -1,4 +1,4 @@
-package wami.ikechukwu.kanu.view.ui
+package wami.ikechukwu.kanu.view
 
 import android.os.Bundle
 import android.view.View
@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import wami.ikechukwu.kanu.R
 import wami.ikechukwu.kanu.databinding.ActivityOnboardingBinding
-import wami.ikechukwu.kanu.viewmodel.OnboardingViewModel
+import wami.ikechukwu.kanu.viewmodel.onboarding.OnboardingViewModel
 
 class OnboardingActivity : AppCompatActivity() {
 
@@ -25,6 +25,12 @@ class OnboardingActivity : AppCompatActivity() {
     //    GET STARTED BUTTON ANIMATION
     lateinit var getStartedBtnAnim: Animation
 
+    //    SET UP THE SHARED PREFERENCES
+    //var onBoardingSharedPreferences:SharedPreferences = this.getSharedPreferences("ONBOARDING", Context.MODE_PRIVATE)
+
+
+    //    TO CHECK IF THE ONBOARDING SCREEN HAS BEEN OPEN
+    //  private var hasOnboardingScreenBeenOpen = onBoardingSharedPreferences.getBoolean("ONBOARDING",false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +43,7 @@ class OnboardingActivity : AppCompatActivity() {
 
 //        ACCESSING THE VIEW MODEL CLASS
         onboardViewModel = ViewModelProvider(this)[OnboardingViewModel::class.java]
+
 
 //        VIEWPAGER WIDGET FROM THE LAYOUT
         binding.onboardingViewpager.adapter = onboardViewModel.initTheAdapter()
@@ -51,7 +58,6 @@ class OnboardingActivity : AppCompatActivity() {
 
             if (currentViewPagerPosition < onboardViewModel.onArrayListSize()) {
                 currentViewPagerPosition++
-
                 setCurrentPosition()
             }
 
@@ -62,12 +68,23 @@ class OnboardingActivity : AppCompatActivity() {
 
         }
 
-//
+//      TAKE US TO THE MAIN APP
         binding.getStartedButton.setOnClickListener {
 
+//                hasOnboardingScreenBeenOpen = true
+//            val sharedPrefEditor:SharedPreferences.Editor = onBoardingSharedPreferences.edit()
+//                sharedPrefEditor.putBoolean("ONBOARDING", hasOnboardingScreenBeenOpen)
+//                sharedPrefEditor.apply()
+//                sharedPrefEditor.commit()
         }
 
     }
+
+//        else{
+//            val intent = Intent(applicationContext, OverViewActivity::class.java)
+//            startActivity(intent)
+//        }
+
 
     private fun getStartedButtonAnimation() {
         getStartedBtnAnim = AnimationUtils.loadAnimation(applicationContext, R.anim.getstarted_btn_anim)

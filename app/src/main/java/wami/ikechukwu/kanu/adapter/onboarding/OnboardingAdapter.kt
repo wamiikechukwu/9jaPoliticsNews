@@ -1,4 +1,4 @@
-package wami.ikechukwu.kanu.adapter
+package wami.ikechukwu.kanu.adapter.onboarding
 
 import android.view.LayoutInflater
 import android.view.View

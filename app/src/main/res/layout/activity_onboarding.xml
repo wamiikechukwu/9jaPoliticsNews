@@ -9,7 +9,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.ui.OnboardingActivity">
+        tools:context=".view.OnboardingActivity">
 
         <TextView
             android:id="@+id/onboarding_welcome_text"
