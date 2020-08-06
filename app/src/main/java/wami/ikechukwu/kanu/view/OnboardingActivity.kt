@@ -1,5 +1,8 @@
 package wami.ikechukwu.kanu.view
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
@@ -9,9 +12,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import wami.ikechukwu.kanu.R
 import wami.ikechukwu.kanu.databinding.ActivityOnboardingBinding
+import wami.ikechukwu.kanu.view.overview.OverViewActivity
 import wami.ikechukwu.kanu.viewmodel.onboarding.OnboardingViewModel
 
 class OnboardingActivity : AppCompatActivity() {
+
 
     //        FOR THE DATA BINDING
     private lateinit var binding: ActivityOnboardingBinding
@@ -25,17 +30,17 @@ class OnboardingActivity : AppCompatActivity() {
     //    GET STARTED BUTTON ANIMATION
     lateinit var getStartedBtnAnim: Animation
 
-    //    SET UP THE SHARED PREFERENCES
-    //var onBoardingSharedPreferences:SharedPreferences = this.getSharedPreferences("ONBOARDING", Context.MODE_PRIVATE)
-
-
-    //    TO CHECK IF THE ONBOARDING SCREEN HAS BEEN OPEN
-    //  private var hasOnboardingScreenBeenOpen = onBoardingSharedPreferences.getBoolean("ONBOARDING",false)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//      HIDDING THE ACTION BAR
+        if (restoredPrefState()) {
+//      OPEN THE NEXT ACTIVITY
+            val intent = Intent(applicationContext, OverViewActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+//      HIDING THE ACTION BAR
         supportActionBar?.hide()
 
 //        BINDING THE LAYOUT TO DATABINDING
@@ -71,19 +76,24 @@ class OnboardingActivity : AppCompatActivity() {
 //      TAKE US TO THE MAIN APP
         binding.getStartedButton.setOnClickListener {
 
-//                hasOnboardingScreenBeenOpen = true
-//            val sharedPrefEditor:SharedPreferences.Editor = onBoardingSharedPreferences.edit()
-//                sharedPrefEditor.putBoolean("ONBOARDING", hasOnboardingScreenBeenOpen)
-//                sharedPrefEditor.apply()
-//                sharedPrefEditor.commit()
+            savedPrefState()
+
+//            OPEN THE NEXT ACTIVITY
+            val intent = Intent(applicationContext, OverViewActivity::class.java)
+            startActivity(intent)
+
+            finish()
+        }
+
+        binding.onboardingSkipText.setOnClickListener {
+            //      OPEN THE NEXT ACTIVITY
+            val intent = Intent(applicationContext, OverViewActivity::class.java)
+            startActivity(intent)
+            finish()
+
         }
 
     }
-
-//        else{
-//            val intent = Intent(applicationContext, OverViewActivity::class.java)
-//            startActivity(intent)
-//        }
 
 
     private fun getStartedButtonAnimation() {
@@ -104,6 +114,25 @@ class OnboardingActivity : AppCompatActivity() {
 
 //            SET THE TAB LAYOUT INVISIBLE
         binding.onboardingTabLayout.visibility = View.INVISIBLE
+    }
+
+    private fun savedPrefState() {
+        //    SET UP THE SHARED PREFERENCES
+        val onBoardingSharedPreferences: SharedPreferences = this.getSharedPreferences("ONBOARDING", Context.MODE_PRIVATE)
+
+//          PUTTING THE VALUES INTO THE SHARED PREF
+        val sharedPrefEditor: SharedPreferences.Editor = onBoardingSharedPreferences.edit()
+        sharedPrefEditor.putBoolean("ONBOARDING", true)
+        sharedPrefEditor.apply()
+        sharedPrefEditor.commit()
+    }
+
+    private fun restoredPrefState(): Boolean {
+        //    SET UP THE SHARED PREFERENCES
+        val onBoardingSharedPreferences: SharedPreferences = this.getSharedPreferences("ONBOARDING", Context.MODE_PRIVATE)
+
+//        GETTING THE VALUES FROM THE SHARED PREF
+        return onBoardingSharedPreferences.getBoolean("ONBOARDING", false)
     }
 }
 

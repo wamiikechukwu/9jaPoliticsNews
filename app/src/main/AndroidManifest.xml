@@ -15,7 +15,9 @@
         <activity android:name=".view.overview.OverViewActivity">
 
         </activity>
-        <activity android:name=".view.OnboardingActivity">
+        <activity
+            android:name=".view.OnboardingActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
