@@ -44,6 +44,9 @@ dependencies {
     //LIVE DATA
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$live_data_version"
 
+//    MATERIAL DESIGN FOR THE BOTTOM NAVIGATION
+    implementation "com.google.android.material:material:$material_design"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     testImplementation 'junit:junit:4.13'

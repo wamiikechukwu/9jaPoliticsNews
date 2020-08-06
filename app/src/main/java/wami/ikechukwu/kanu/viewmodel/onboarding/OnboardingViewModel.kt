@@ -1,8 +1,8 @@
-package wami.ikechukwu.kanu.viewmodel
+package wami.ikechukwu.kanu.viewmodel.onboarding
 
 import androidx.lifecycle.ViewModel
 import wami.ikechukwu.kanu.R
-import wami.ikechukwu.kanu.adapter.OnboardingAdapter
+import wami.ikechukwu.kanu.adapter.onboarding.OnboardingAdapter
 import wami.ikechukwu.kanu.model.OnboardingModel
 
 class OnboardingViewModel : ViewModel() {
@@ -15,10 +15,10 @@ class OnboardingViewModel : ViewModel() {
 
     //SETTING UP THE ARRAYLIST
     private fun initDataModelForTheOnboarding() {
-        onArrayList.add(OnboardingModel("Get The Latest New", "Read them all new", R.drawable.git2, R.color.firstColor))
-        onArrayList.add(OnboardingModel("Be updated", "Be inspire", R.drawable.git2, R.color.secondColor))
-        onArrayList.add(OnboardingModel("Read", "Learn", R.drawable.git2, R.color.thirdColor))
-        onArrayList.add(OnboardingModel("see", "understand", R.drawable.git2, R.color.fourthColor))
+        onArrayList.add(OnboardingModel("Get All Latest News On Your Mobile", "Read With Ease", R.drawable.app, R.color.firstColor))
+        onArrayList.add(OnboardingModel("Be Updated With Whats Happening", "Educate YourSelf", R.drawable.knowledge, R.color.secondColor))
+        onArrayList.add(OnboardingModel("Read", "Be Inspire", R.drawable.student, R.color.thirdColor))
+        onArrayList.add(OnboardingModel("See The World", "From One Spot", R.drawable.world, R.color.fourthColor))
     }
 
     //    PASSING IN THE ARRAYLIST TO THE ADAPTER
