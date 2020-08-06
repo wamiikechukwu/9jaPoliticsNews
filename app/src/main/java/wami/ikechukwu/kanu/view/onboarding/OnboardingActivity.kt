@@ -1,4 +1,4 @@
-package wami.ikechukwu.kanu.view
+package wami.ikechukwu.kanu.view.onboarding
 
 import android.content.Context
 import android.content.Intent
@@ -33,10 +33,15 @@ class OnboardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+//        CHECK IF THE ONBOARDING SCREEN HAS BEEN SHOWN BEFORE
+//        IF IT HAS THEN SHOW THE OVER VIEW ACTIVITY
+
         if (restoredPrefState()) {
-//      OPEN THE NEXT ACTIVITY
+//      OPEN THE OVER VIEW  ACTIVITY
             val intent = Intent(applicationContext, OverViewActivity::class.java)
             startActivity(intent)
+
+//            STOP THE PREVIOUS ACTIVITY FROM SHOWING
             finish()
         }
 
@@ -61,13 +66,21 @@ class OnboardingActivity : AppCompatActivity() {
 //      WHEN THE NEXT BUTTON IS CLICKED DO THE FOLLOWING
         binding.onboardingNextButton.setOnClickListener {
 
+//            FOR MOVING THE VIEW PAGER WHEN THE NEXT BUTTON IS CLICKED
             if (currentViewPagerPosition < onboardViewModel.onArrayListSize()) {
                 currentViewPagerPosition++
+
+//                GET THE CURRENT ADAPTERS POSITION
                 setCurrentPosition()
             }
 
+//            IF WE HAVE REACHED THE END OF THE VIEW PAGER
             if (currentViewPagerPosition == onboardViewModel.onArrayListSize()) {
+
+//                SHOW OR NOT TO SHOW THE CORRESPONDING VIEW
                 viewVisibility()
+
+//                SHOW THE ANIMATION
                 getStartedButtonAnimation()
             }
 
@@ -76,31 +89,38 @@ class OnboardingActivity : AppCompatActivity() {
 //      TAKE US TO THE MAIN APP
         binding.getStartedButton.setOnClickListener {
 
+//            SAVE A VALUE TO SHAREDPREF. TO SHOW THAT THE USER HAS SEEN THE ONBOARDING SCREEN
             savedPrefState()
 
-//            OPEN THE NEXT ACTIVITY
+//            OPEN THE OVER VIEW ACTIVITY ACTIVITY
             val intent = Intent(applicationContext, OverViewActivity::class.java)
             startActivity(intent)
 
+//            END THE PREVIOUS ACTIVITY
             finish()
         }
 
+//        WHEN THE USER SKIPS THE ONBOARDING
         binding.onboardingSkipText.setOnClickListener {
-            //      OPEN THE NEXT ACTIVITY
+            //      OPEN THE OVER VIEW ACTIVITY
             val intent = Intent(applicationContext, OverViewActivity::class.java)
             startActivity(intent)
+
+//            SAVE A VALUE TO SHAREDPREF. TO SHOW THAT THE USER HAS SEEN THE ONBOARDING SCREEN
+            savedPrefState()
+
+//            END THE PREVIOUS ACTIVITY
             finish()
-
         }
-
     }
 
-
+    // SHOW ANIMATION
     private fun getStartedButtonAnimation() {
         getStartedBtnAnim = AnimationUtils.loadAnimation(applicationContext, R.anim.getstarted_btn_anim)
         binding.getStartedButton.animation = getStartedBtnAnim
     }
 
+    //    GET CURRENT VIEW PAGER ADAPTERS POSITION
     private fun setCurrentPosition() {
         binding.onboardingViewpager.currentItem = currentViewPagerPosition
     }
@@ -114,8 +134,12 @@ class OnboardingActivity : AppCompatActivity() {
 
 //            SET THE TAB LAYOUT INVISIBLE
         binding.onboardingTabLayout.visibility = View.INVISIBLE
+
+//        SET THE SKIP BUTTON INVISIBLE
+        binding.onboardingSkipText.visibility = View.INVISIBLE
     }
 
+    //    CALLED WHEN THE USER HAS SEEN THE ONBOARDING SCREEN
     private fun savedPrefState() {
         //    SET UP THE SHARED PREFERENCES
         val onBoardingSharedPreferences: SharedPreferences = this.getSharedPreferences("ONBOARDING", Context.MODE_PRIVATE)
@@ -127,6 +151,7 @@ class OnboardingActivity : AppCompatActivity() {
         sharedPrefEditor.commit()
     }
 
+    //    CALLED TO CHECK IF THE USER HAS SEEN THE ONBOARDING SCREEN
     private fun restoredPrefState(): Boolean {
         //    SET UP THE SHARED PREFERENCES
         val onBoardingSharedPreferences: SharedPreferences = this.getSharedPreferences("ONBOARDING", Context.MODE_PRIVATE)
