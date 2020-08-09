@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="wami.ikechukwu.kanu.view.overview.home.HomeFragment"
+        android:label="HomeFragment">
+        <action
+            android:id="@+id/action_homeFragment_to_readerFragment"
+            app:destination="@id/readerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/readerFragment"
+        android:name="wami.ikechukwu.kanu.view.overview.ReaderFragment"
+        android:label="reader_fragment_layout"
+        tools:layout="@layout/reader_fragment_layout" />
+</navigation>

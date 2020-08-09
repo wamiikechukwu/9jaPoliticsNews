@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.overview.home.HomeFragment">
+
+        <TextView
+            android:id="@+id/home_intro_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_fragment_margin_start"
+            android:text="Howdy!"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/home_intro_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_fragment_margin_start"
+            android:fontFamily="@font/gotham_bold"
+            android:text="Discover Latest News"
+            android:textColor="#000"
+            android:textSize="29sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_intro_one" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_fragment_margin_start"
+            android:background="@drawable/onboarding_button_shape"
+            android:drawableEnd="@drawable/home_fragment_search"
+            android:hint="Search For News"
+            android:textColorHint="#000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_intro_two" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
