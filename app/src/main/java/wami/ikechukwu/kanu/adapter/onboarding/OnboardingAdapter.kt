@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import wami.ikechukwu.kanu.R
-import wami.ikechukwu.kanu.model.OnboardingModel
+import wami.ikechukwu.kanu.model.onboarding.OnboardingModel
 
 class OnboardingAdapter(private var onboardingArrayList: ArrayList<OnboardingModel>) : PagerAdapter() {
 

@@ -1,4 +1,4 @@
-package wami.ikechukwu.kanu.model
+package wami.ikechukwu.kanu.model.onboarding
 
 data class OnboardingModel(
         val onboardTitle: String,
