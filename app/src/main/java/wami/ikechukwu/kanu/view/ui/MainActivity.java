@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
 import wami.ikechukwu.kanu.R;
-import wami.ikechukwu.kanu.model.OnboardingModel;
+import wami.ikechukwu.kanu.model.onboarding.OnboardingModel;
 import wami.ikechukwu.kanu.viewmodel.newsAdapter;
 import wami.ikechukwu.kanu.viewmodel.news_detail;
 

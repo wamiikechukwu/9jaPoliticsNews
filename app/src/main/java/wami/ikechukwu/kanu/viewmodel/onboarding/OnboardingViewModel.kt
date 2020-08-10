@@ -3,7 +3,7 @@ package wami.ikechukwu.kanu.viewmodel.onboarding
 import androidx.lifecycle.ViewModel
 import wami.ikechukwu.kanu.R
 import wami.ikechukwu.kanu.adapter.onboarding.OnboardingAdapter
-import wami.ikechukwu.kanu.model.OnboardingModel
+import wami.ikechukwu.kanu.model.onboarding.OnboardingModel
 
 class OnboardingViewModel : ViewModel() {
     //    DECLARED ARRAYLIST

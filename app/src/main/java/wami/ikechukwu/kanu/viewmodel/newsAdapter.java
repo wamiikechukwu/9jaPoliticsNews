@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import wami.ikechukwu.kanu.R;
-import wami.ikechukwu.kanu.model.OnboardingModel;
+import wami.ikechukwu.kanu.model.onboarding.OnboardingModel;
 
 public class newsAdapter extends RecyclerView.Adapter<newsAdapter.viewHolder> {
 
