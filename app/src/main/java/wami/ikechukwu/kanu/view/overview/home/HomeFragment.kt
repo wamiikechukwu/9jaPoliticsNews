@@ -13,28 +13,31 @@ import wami.ikechukwu.kanu.databinding.HomeFragmentLayoutBinding
 
 class HomeFragment : Fragment() {
 
-//    companion object {
-//        fun newInstance() = HomeFragment()
-//    }
-
     //    DATA BINDING
     private lateinit var binding: HomeFragmentLayoutBinding
 
     //    VIEW MODEL
     private lateinit var homeFragmentViewModel: HomeFragmentViewModel
 
+//    VIEW MODEL FACTORY
+    // private lateinit var homeFragmentViewModelFactory: HomeFragmentViewModelFactory
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 //  IMPLEMENTING DATA BINDING
         binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment_layout, container, false)
-        return binding.root
 
-    }
+        //   homeFragmentViewModelFactory = HomeFragmentViewModelFactory(Repository(APIserviceLmpl(con)))
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         homeFragmentViewModel = ViewModelProviders.of(this).get(HomeFragmentViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        homeFragmentViewModel.jsonResponse(requireContext())
+//        var i = homeFragmentViewModel.live_ik.observe(viewLifecycleOwner, Observer { ik ->
+//            binding.homeIntroOne.text = (ik.toString()?:"ik")
+//        })
+
+        return binding.root
     }
 
 }

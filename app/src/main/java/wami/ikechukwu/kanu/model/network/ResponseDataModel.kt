@@ -1,6 +1,6 @@
 package wami.ikechukwu.kanu.model.network
 
-class ResponseDataModel(
+data class ResponseDataModel(
         val Title: String,
         val Description: String,
         val Url: String,
