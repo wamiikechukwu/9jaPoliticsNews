@@ -30,6 +30,7 @@
             app:layout_constraintTop_toBottomOf="@id/home_intro_one" />
 
         <EditText
+            android:id="@+id/home_fragment_search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/home_fragment_margin_start"
@@ -40,6 +41,15 @@
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/home_intro_two" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_fragment_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_fragment_search_bar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
