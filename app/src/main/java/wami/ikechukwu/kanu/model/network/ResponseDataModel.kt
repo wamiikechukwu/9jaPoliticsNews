@@ -6,4 +6,5 @@ data class ResponseDataModel(
         // val Url: String,
         val urlToImage: String
         //val publishedAt: String
+//TODO DELETE THIS FILE.... THERE IS NO NEED FOR IT AGAIN
 )
