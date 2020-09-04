@@ -6,9 +6,9 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import wami.ikechukwu.kanu.`interface`.APIService
+import wami.ikechukwu.kanu.api.NewsDBInterface
 
-class APIserviceLmpl(val context: Context) : APIService {
+class APIserviceLmpl(val context: Context) : NewsDBInterface {
 
     private val URLKEY: String = "buhari"
 
