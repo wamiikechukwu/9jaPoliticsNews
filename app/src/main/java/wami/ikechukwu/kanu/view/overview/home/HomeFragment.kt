@@ -11,14 +11,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import wami.ikechukwu.kanu.HomeFragmentViewModel
 import wami.ikechukwu.kanu.R
 import wami.ikechukwu.kanu.adapter.fragments.HomeFragmentAdapter
 import wami.ikechukwu.kanu.databinding.HomeFragmentLayoutBinding
-import wami.ikechukwu.kanu.model.network.ResponseDataModel
+import wami.ikechukwu.kanu.model.network.NewsDetails
 
 class HomeFragment : Fragment() {
 
@@ -36,7 +35,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val list: ArrayList<ResponseDataModel> = java.util.ArrayList()
+        val list: ArrayList<NewsDetails> = java.util.ArrayList()
 
 //  IMPLEMENTING DATA BINDING
         binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment_layout, container, false)
@@ -48,7 +47,7 @@ class HomeFragment : Fragment() {
         val url: String = "https://newsapi.org/v2/everything?q=$URLKEY&language=en&sortBy=publishedAt&pageSize=100&apiKey=883fcfd667104a34ac74c1827fb419e4"
 
 
-        val jsonObjRequest = JsonObjectRequest(Request.Method.GET, url, null, Response.Listener { response ->
+        val jsonObjRequest = JsonObjectRequest(Request.Method.GET, url, null, { response ->
 
 //            GET THE ARRAY FROM THE JSON OBJECTION WITH THE NAME "articles"
             val jsonArray = response.getJSONArray("articles")
@@ -57,13 +56,13 @@ class HomeFragment : Fragment() {
             for (i in 0 until jsonArray.length()) {
                 val jsonObj = jsonArray.getJSONObject(i)
 
-                list.add(ResponseDataModel(jsonObj.getString("title").toString(), jsonObj.getString("urlToImage").toString()))
+                list.add(NewsDetails(jsonObj.getString("title").toString(), jsonObj.getString("urlToImage").toString()))
                 Toast.makeText(context, "Ran", Toast.LENGTH_LONG).show()
                 binding.homeIntroOne.text = jsonObj.getString("title").toString()
                 HomeFragmentAdapter(list)
 
             }
-        }, Response.ErrorListener { error ->
+        }, { error ->
             Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show()
         })
 
