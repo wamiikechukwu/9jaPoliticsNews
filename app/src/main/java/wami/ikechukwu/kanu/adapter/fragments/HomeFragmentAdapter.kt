@@ -8,20 +8,20 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import wami.ikechukwu.kanu.R
-import wami.ikechukwu.kanu.model.network.ResponseDataModel
+import wami.ikechukwu.kanu.model.network.NewsDetails
 
-class HomeFragmentAdapter(private val mArrayList: ArrayList<ResponseDataModel>) : RecyclerView.Adapter<HomeFragmentAdapter.MyViewHolder>() {
+class HomeFragmentAdapter(private val mArrayList: ArrayList<NewsDetails>) : RecyclerView.Adapter<HomeFragmentAdapter.MyViewHolder>() {
 
     class MyViewHolder(inflate: View) : RecyclerView.ViewHolder(inflate) {
 
-        fun bindMyViewHolder(myArrayList: ResponseDataModel) {
+        fun bindMyViewHolder(myArrayList: NewsDetails) {
 
             val homeFrameImageView: ImageView = itemView.findViewById(R.id.home_fragment_recyclerView_imageview)
             val homeFragmentTitle: TextView = itemView.findViewById(R.id.home_fragment_recyclerView_title)
 
 
             Glide.with(itemView.context).load(myArrayList.urlToImage).into(homeFrameImageView)
-            homeFragmentTitle.text = myArrayList.Title
+            homeFragmentTitle.text = myArrayList.title
         }
     }
 
