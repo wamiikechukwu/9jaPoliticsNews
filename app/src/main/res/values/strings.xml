@@ -4,4 +4,6 @@
     <string name="read_the_full_news">Read The Full News</string>
     <string name="share_news_via">Share News Via</string>
     <string name="share_images">share images</string>
+
+    <string name="api_key">883fcfd667104a34ac74c1827fb419e4</string>
 </resources>
